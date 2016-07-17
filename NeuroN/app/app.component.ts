@@ -1,14 +1,17 @@
 ﻿import { Component } from 'angular2/core';
+import { HTTP_PROVIDERS } from 'angular2/http';
+import 'rxjs/Rx';   // load all features
+
 import { ITask, Task } from './tasks/task';
 import { TaskListComponent } from './tasks/task-list.component';
 import { EditTaskComponent } from './tasks/edit-task.component';
 import { TaskService } from './tasks/task.service';
 
 @Component({
-    selector: 'ne-app',
+    selector: 'nn-app',
     templateUrl: 'app/app.component.html',
     directives: [TaskListComponent, EditTaskComponent],
-    providers: [TaskService]
+    providers: [TaskService, HTTP_PROVIDERS]
 })
 
 export class AppComponent {

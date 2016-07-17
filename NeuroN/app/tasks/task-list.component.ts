@@ -13,13 +13,12 @@ import { TaskService } from './task.service';
 })
 
 export class TaskListComponent implements OnInit, OnChanges {
+    @Input() pageTitle: string;
+
     constructor(private taskService: TaskService) {
     }
-
-    /*@Input() tasks: ITask[];*/
-    tasks: ITask[];// = this.taskService.getAllTasks();
-    @Input() pageTitle: string;
-    //pageTitle: string = 'Task list';
+    
+    tasks: ITask[];
     imageHeight: number = 50;
     imageWidth: number = 40;
     showImage: boolean = false;
@@ -29,9 +28,12 @@ export class TaskListComponent implements OnInit, OnChanges {
         this.showImage = !this.showImage;
     }
 
+    errorMessage: any;
     ngOnInit(): void {
         console.log('initialization of component task list.');
-        this.tasks = this.taskService.getAllTasks();
+        this.taskService.getAllTasks().subscribe(
+            tasks => this.tasks = tasks,
+            error => this.errorMessage = <any>error);
     }
 
     ngOnChanges(changes): void {

@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,51 +10,62 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, http_1, Observable_1;
     var TaskService;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
+            },
+            function (Observable_1_1) {
+                Observable_1 = Observable_1_1;
             }],
         execute: function() {
+            //import { Cookie } from 'ng2-cookies/ng2-cookies';
             let TaskService = class TaskService {
-                constructor() {
-                    this.tasks = [
-                        {
-                            id: 0,
-                            title: 'task 1',
-                            priority: 3,
-                            finished: false,
-                            deadline: 'today',
-                            imageUrl: 'https://images.duckduckgo.com/iu/?u=http%3A%2F%2Ffreeflaticons.net%2Fwp-content%2Fuploads%2F2014%2F10%2Ftask-copy-1412926696kng48.png&f=1'
-                        }, {
-                            id: 1,
-                            title: 'task 2',
-                            priority: 1,
-                            finished: true,
-                            deadline: 'yesterday',
-                            imageUrl: 'https://images.duckduckgo.com/iu/?u=http%3A%2F%2Ffreeflaticons.net%2Fwp-content%2Fuploads%2F2014%2F10%2Ftask-copy-1412926696kng48.png&f=1'
-                        }, {
-                            id: 2,
-                            title: 'task 3',
-                            priority: 2,
-                            finished: false,
-                            deadline: 'today',
-                            imageUrl: 'https://images.duckduckgo.com/iu/?u=http%3A%2F%2Ffreeflaticons.net%2Fwp-content%2Fuploads%2F2014%2F10%2Ftask-copy-1412926696kng48.png&f=1'
-                        }
-                    ];
+                constructor(http) {
+                    //      let task = new Task(4, 'tittttleee', 3, 'today', false, '');
+                    //    Cookie.set('task1', JSON.stringify(task));
+                    this.http = http;
+                    this.azureTasksApiUrl = 'http://neuronapi.azurewebsites.net/api/tasks';
+                    this.tasksApiUrl = 'api/tasks/tasks.json';
+                    //  let taskReceived = Cookie.get('task1');
                 }
                 getAllTasks() {
+                    //let tasksCookies = Cookie.get('tasks');
+                    //if (!tasksCookies)
+                    //    tasksCookies.set('tasks', )
+                    this.tasks = this.http.get(this.tasksApiUrl)
+                        .map((response) => response.json())
+                        .do(data => console.log('All: ' + JSON.stringify(data)))
+                        .catch(this.handleError);
                     return this.tasks;
+                }
+                handleError(error) {
+                    console.log(error);
+                    return Observable_1.Observable.throw(error.json().error || 'Server error');
                 }
                 getTask(id) {
                     return this.tasks[0];
                 }
+                addTask(task) {
+                    //let newTasks: ITask[] = [task];
+                    /* this.http.post(this.tasksApiUrl, JSON.stringify(task))
+                         .map(response => response.json())
+                         .subscribe(data => {
+                             this.tasks.push(data);
+                             this.tasks$.next(this.tasks)
+                             //this.tasks.next(this.dataStore.todos);
+                         }, error => console.log('Could not create todo.'));
+                     */
+                }
             };
             TaskService = __decorate([
                 core_1.Injectable(), 
-                __metadata('design:paramtypes', [])
+                __metadata('design:paramtypes', [http_1.Http])
             ], TaskService);
             exports_1("TaskService", TaskService);
         }

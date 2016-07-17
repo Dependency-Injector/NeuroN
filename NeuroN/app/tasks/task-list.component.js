@@ -30,7 +30,6 @@ System.register(['angular2/core', './task-filter.pipe', '../shared/star.componen
             let TaskListComponent = class TaskListComponent {
                 constructor(taskService) {
                     this.taskService = taskService;
-                    //pageTitle: string = 'Task list';
                     this.imageHeight = 50;
                     this.imageWidth = 40;
                     this.showImage = false;
@@ -41,7 +40,7 @@ System.register(['angular2/core', './task-filter.pipe', '../shared/star.componen
                 }
                 ngOnInit() {
                     console.log('initialization of component task list.');
-                    this.tasks = this.taskService.getAllTasks();
+                    this.taskService.getAllTasks().subscribe(tasks => this.tasks = tasks, error => this.errorMessage = error);
                 }
                 ngOnChanges(changes) {
                     if (changes.tasks)
@@ -54,7 +53,6 @@ System.register(['angular2/core', './task-filter.pipe', '../shared/star.componen
                 }
             };
             __decorate([
-                // = this.taskService.getAllTasks();
                 core_1.Input(), 
                 __metadata('design:type', String)
             ], TaskListComponent.prototype, "pageTitle", void 0);

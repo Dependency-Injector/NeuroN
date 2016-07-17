@@ -77,7 +77,7 @@
     <Content Include="app\tasks\task-list.component.html" />
     <Content Include="node_modules\angular2\core.js" />
     <Content Include="packages.config" />
-    <Content Include="api\products\products.json" />
+    <Content Include="api\tasks\tasks.json" />
     <Content Include="app\home\welcome.component.js.map" />
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />

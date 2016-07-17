@@ -250,3 +250,10 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+/NeuroN/npm-debug.log.852751895
+/NeuroN/typings
+/NeuroN/app/**/*.js
+/NeuroN/app/**/*.map
+/NeuroN/node_modules
+/NeuroN/jspm_packages
+/NeuroN/bower_components

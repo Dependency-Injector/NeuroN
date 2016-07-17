@@ -1,4 +1,4 @@
-System.register(['angular2/core', './tasks/task-list.component', './tasks/edit-task.component', './tasks/task.service'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './tasks/task-list.component', './tasks/edit-task.component', './tasks/task.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,13 +10,17 @@ System.register(['angular2/core', './tasks/task-list.component', './tasks/edit-t
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, task_list_component_1, edit_task_component_1, task_service_1;
+    var core_1, http_1, task_list_component_1, edit_task_component_1, task_service_1;
     var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
+            function (http_1_1) {
+                http_1 = http_1_1;
+            },
+            function (_1) {},
             function (task_list_component_1_1) {
                 task_list_component_1 = task_list_component_1_1;
             },
@@ -66,10 +70,10 @@ System.register(['angular2/core', './tasks/task-list.component', './tasks/edit-t
             };
             AppComponent = __decorate([
                 core_1.Component({
-                    selector: 'ne-app',
+                    selector: 'nn-app',
                     templateUrl: 'app/app.component.html',
                     directives: [task_list_component_1.TaskListComponent, edit_task_component_1.EditTaskComponent],
-                    providers: [task_service_1.TaskService]
+                    providers: [task_service_1.TaskService, http_1.HTTP_PROVIDERS]
                 }), 
                 __metadata('design:paramtypes', [])
             ], AppComponent);
