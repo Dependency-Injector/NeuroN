@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(exports_1, context_1) {
+System.register(['angular2/core', './task', 'angular2/http', 'rxjs/Observable', 'rxjs/Subject'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,57 +10,70 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Observable'], function(
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, Observable_1;
+    var core_1, task_1, http_1, Observable_1, Subject_1;
     var TaskService;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
+            function (task_1_1) {
+                task_1 = task_1_1;
+            },
             function (http_1_1) {
                 http_1 = http_1_1;
             },
             function (Observable_1_1) {
                 Observable_1 = Observable_1_1;
+            },
+            function (Subject_1_1) {
+                Subject_1 = Subject_1_1;
             }],
         execute: function() {
-            //import { Cookie } from 'ng2-cookies/ng2-cookies';
             let TaskService = class TaskService {
                 constructor(http) {
-                    //      let task = new Task(4, 'tittttleee', 3, 'today', false, '');
-                    //    Cookie.set('task1', JSON.stringify(task));
                     this.http = http;
                     this.azureTasksApiUrl = 'http://neuronapi.azurewebsites.net/api/tasks';
                     this.tasksApiUrl = 'api/tasks/tasks.json';
-                    //  let taskReceived = Cookie.get('task1');
+                    this.tasks = [];
+                    this.subject = new Subject_1.Subject();
+                    this.obtainTasksFromJson();
                 }
-                getAllTasks() {
-                    //let tasksCookies = Cookie.get('tasks');
-                    //if (!tasksCookies)
-                    //    tasksCookies.set('tasks', )
-                    this.tasks = this.http.get(this.tasksApiUrl)
-                        .map((response) => response.json())
-                        .do(data => console.log('All: ' + JSON.stringify(data)))
-                        .catch(this.handleError);
-                    return this.tasks;
+                addTask(newTask) {
+                    this.tasks.push(newTask);
+                    this.subject.next(this.tasks);
                 }
-                handleError(error) {
-                    console.log(error);
-                    return Observable_1.Observable.throw(error.json().error || 'Server error');
+                getTasks() {
+                    return this.subject.asObservable();
                 }
                 getTask(id) {
                     return this.tasks[0];
                 }
-                addTask(task) {
-                    //let newTasks: ITask[] = [task];
-                    /* this.http.post(this.tasksApiUrl, JSON.stringify(task))
-                         .map(response => response.json())
-                         .subscribe(data => {
-                             this.tasks.push(data);
-                             this.tasks$.next(this.tasks)
-                             //this.tasks.next(this.dataStore.todos);
-                         }, error => console.log('Could not create todo.'));
-                     */
+                obtainTasksFromJson() {
+                    // Obtains tasks from json file
+                    // Maps them to array of Task
+                    // Subscribes to itself (change this in future) and save obtained tasks
+                    // Notify about task collection change
+                    this.http.get(this.tasksApiUrl)
+                        .map((responseData) => {
+                        return responseData.json();
+                    })
+                        .map((tasks) => {
+                        let result = [];
+                        if (tasks) {
+                            tasks.forEach((task) => {
+                                result.push(new task_1.Task(task.id, task.title, 3, '', false, ''));
+                            });
+                            return result;
+                        }
+                    }).subscribe(res => {
+                        this.tasks = res;
+                        this.subject.next(this.tasks);
+                    });
+                }
+                handleError(error) {
+                    console.log(error);
+                    return Observable_1.Observable.throw(error.json().error || 'Server error');
                 }
             };
             TaskService = __decorate([

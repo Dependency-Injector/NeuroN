@@ -30,10 +30,11 @@ export class TaskListComponent implements OnInit, OnChanges {
 
     errorMessage: any;
     ngOnInit(): void {
-        console.log('initialization of component task list.');
-        this.taskService.getAllTasks().subscribe(
-            tasks => this.tasks = tasks,
-            error => this.errorMessage = <any>error);
+        this.taskService.getTasks()
+            .subscribe((tasks: ITask[]) => {
+                this.tasks = tasks;
+                console.log('tasks list updated in task-list');
+            });
     }
 
     ngOnChanges(changes): void {
@@ -42,7 +43,6 @@ export class TaskListComponent implements OnInit, OnChanges {
 
         console.log('sth changed');
         console.log(changes);
-
     }
 
     onPriorityClicked(message: string): void {

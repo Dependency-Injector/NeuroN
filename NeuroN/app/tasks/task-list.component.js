@@ -39,8 +39,11 @@ System.register(['angular2/core', './task-filter.pipe', '../shared/star.componen
                     this.showImage = !this.showImage;
                 }
                 ngOnInit() {
-                    console.log('initialization of component task list.');
-                    this.taskService.getAllTasks().subscribe(tasks => this.tasks = tasks, error => this.errorMessage = error);
+                    this.taskService.getTasks()
+                        .subscribe((tasks) => {
+                        this.tasks = tasks;
+                        console.log('tasks list updated in task-list');
+                    });
                 }
                 ngOnChanges(changes) {
                     if (changes.tasks)
