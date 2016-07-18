@@ -3,7 +3,7 @@
     title: string;
     priority: number;
     deadline: string;
-    finished: boolean;
+    isFinished: boolean;
     imageUrl: string;
 }
 
@@ -12,10 +12,13 @@ export class Task implements ITask {
         public title: string,
         public priority: number,
         public deadline: string,
-        public finished: boolean,
+        public isFinished: boolean,
         public imageUrl: string) {
+        
     }
-    
+    /*constructor(values: Object = {}) {
+        Object.assign(this, values);
+    }*/
 
     calculateRemainingDays(currentDay: number): number {
         return 4;

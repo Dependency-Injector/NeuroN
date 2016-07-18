@@ -27,8 +27,8 @@ export class AppComponent {
         this.taskListTitle = 'Todo list edited';
     }
 
-    tasks: ITask[] = [
-        {
+    tasks: ITask[] = [];
+        /*{
             id: 0,
             title: 'task 1',
             priority: 3,
@@ -50,5 +50,5 @@ export class AppComponent {
             deadline: 'today',
             imageUrl: 'https://images.duckduckgo.com/iu/?u=http%3A%2F%2Ffreeflaticons.net%2Fwp-content%2Fuploads%2F2014%2F10%2Ftask-copy-1412926696kng48.png&f=1'
         }
-    ];
+    ];*/
 }

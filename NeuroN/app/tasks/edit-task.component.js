@@ -28,9 +28,14 @@ System.register(['angular2/core', './task', './task.service'], function(exports_
                 constructor(taskService) {
                     this.taskService = taskService;
                     this.taskAdded = new core_1.EventEmitter();
+                    this.clear();
                 }
                 add() {
-                    this.task = new task_1.Task(4, this.title, this.priority, this.deadline, false, '');
+                    this.task = new task_1.Task;
+                    this.task.title = this.title;
+                    this.task.deadline = this.deadline;
+                    this.task.isFinished = false;
+                    this.task.priority = 2;
                     this.taskService.addTask(this.task);
                     this.clear();
                 }
@@ -42,7 +47,7 @@ System.register(['angular2/core', './task', './task.service'], function(exports_
                 clear() {
                     this.title = '';
                     this.priority = 0;
-                    this.deadline = '';
+                    this.deadline = new Date();
                 }
             };
             __decorate([

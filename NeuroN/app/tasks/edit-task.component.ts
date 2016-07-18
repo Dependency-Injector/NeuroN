@@ -14,13 +14,19 @@ export class EditTaskComponent {
     title: string;
     deadline: any;
     priority: number;
-    task: Task;
+    task: ITask;
 
     constructor(private taskService: TaskService) {
+        this.clear();
     }
 
     add(): void {
-        this.task = new Task(4, this.title, this.priority, this.deadline, false, '');
+        this.task = new Task;
+        this.task.title = this.title;
+        this.task.deadline = this.deadline;
+        this.task.isFinished = false;
+        this.task.priority = 2;
+        
         this.taskService.addTask(this.task);
         this.clear();
     }
@@ -35,6 +41,7 @@ export class EditTaskComponent {
     clear(): void {
         this.title = '';
         this.priority = 0;
-        this.deadline = '';
+        this.deadline = new Date();
+
     }
 }

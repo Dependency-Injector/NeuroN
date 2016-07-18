@@ -33,13 +33,18 @@ System.register(['angular2/core', './task', 'angular2/http', 'rxjs/Observable', 
             let TaskService = class TaskService {
                 constructor(http) {
                     this.http = http;
-                    this.azureTasksApiUrl = 'http://neuronapi.azurewebsites.net/api/tasks';
+                    this.azureTasksApiUrl = 'http://apineuro.azurewebsites.net/api/tasks';
                     this.tasksApiUrl = 'api/tasks/tasks.json';
                     this.tasks = [];
                     this.subject = new Subject_1.Subject();
                     this.obtainTasksFromJson();
                 }
                 addTask(newTask) {
+                    this.http.post(this.azureTasksApiUrl, JSON.stringify(newTask))
+                        .map((responseData) => {
+                        console.log("Returned data: ");
+                        console.log(responseData);
+                    });
                     this.tasks.push(newTask);
                     this.subject.next(this.tasks);
                 }
@@ -54,7 +59,7 @@ System.register(['angular2/core', './task', 'angular2/http', 'rxjs/Observable', 
                     // Maps them to array of Task
                     // Subscribes to itself (change this in future) and save obtained tasks
                     // Notify about task collection change
-                    this.http.get(this.tasksApiUrl)
+                    this.http.get(this.azureTasksApiUrl)
                         .map((responseData) => {
                         return responseData.json();
                     })

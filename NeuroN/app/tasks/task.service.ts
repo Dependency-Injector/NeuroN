@@ -7,16 +7,22 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 
 export class TaskService {
-    private azureTasksApiUrl = 'http://neuronapi.azurewebsites.net/api/tasks';
+    private azureTasksApiUrl = 'http://apineuro.azurewebsites.net/api/tasks';
     private tasksApiUrl = 'api/tasks/tasks.json';
-    private tasks: Task[] = [];
-    private subject: Subject<Task[]> = new Subject<Task[]>();
+    private tasks: ITask[] = [];
+    private subject: Subject<ITask[]> = new Subject<ITask[]>();
     
     constructor(private http: Http) {
         this.obtainTasksFromJson();
     }
 
-    addTask(newTask: Task): void {
+    addTask(newTask: ITask): void {
+        this.http.post(this.azureTasksApiUrl, JSON.stringify(newTask))
+            .map((responseData) => {
+                console.log("Returned data: ");
+                console.log(responseData);
+            });
+
         this.tasks.push(newTask);
         this.subject.next(this.tasks);
     }
@@ -34,12 +40,12 @@ export class TaskService {
         // Maps them to array of Task
         // Subscribes to itself (change this in future) and save obtained tasks
         // Notify about task collection change
-        this.http.get(this.tasksApiUrl)
+        this.http.get(this.azureTasksApiUrl)
             .map((responseData) => {
                 return responseData.json();
             })
             .map((tasks: Array<any>) => {
-                let result: Array<Task> = [];
+                let result: Array<ITask> = [];
                 if (tasks) {
                     tasks.forEach((task) => {
                         result.push(new Task(task.id, task.title, 3, '', false, ''));

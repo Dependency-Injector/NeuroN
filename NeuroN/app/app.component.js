@@ -35,30 +35,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './tasks/task-list
                 constructor() {
                     this.pageTitle = 'Acme product management';
                     this.taskListTitle = 'Todo list';
-                    this.tasks = [
-                        {
-                            id: 0,
-                            title: 'task 1',
-                            priority: 3,
-                            finished: false,
-                            deadline: 'today',
-                            imageUrl: 'https://images.duckduckgo.com/iu/?u=http%3A%2F%2Ffreeflaticons.net%2Fwp-content%2Fuploads%2F2014%2F10%2Ftask-copy-1412926696kng48.png&f=1'
-                        }, {
-                            id: 1,
-                            title: 'task 2',
-                            priority: 1,
-                            finished: true,
-                            deadline: 'yesterday',
-                            imageUrl: 'https://images.duckduckgo.com/iu/?u=http%3A%2F%2Ffreeflaticons.net%2Fwp-content%2Fuploads%2F2014%2F10%2Ftask-copy-1412926696kng48.png&f=1'
-                        }, {
-                            id: 2,
-                            title: 'task 3',
-                            priority: 2,
-                            finished: false,
-                            deadline: 'today',
-                            imageUrl: 'https://images.duckduckgo.com/iu/?u=http%3A%2F%2Ffreeflaticons.net%2Fwp-content%2Fuploads%2F2014%2F10%2Ftask-copy-1412926696kng48.png&f=1'
-                        }
-                    ];
+                    this.tasks = [];
                 }
                 onTaskAdded($event) {
                     console.log('Event sent to app: ');
