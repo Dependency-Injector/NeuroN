@@ -24,12 +24,14 @@
                     </th>
                     <th>Title</th>
                     <th>Deadline</th>
-                    <th>Priority</th>
+                    <!--<th>Priority</th>-->
                     <th>Finished</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="#task of tasks | taskFilter:listFilter">
+                <!--<tr *ngFor="#task of tasks | taskFilter:listFilter">-->
+                <tr *ngFor="#task of tasks">
                     <td>
                         <img *ngIf="showImage"
                               [src]="task.imageUrl"
@@ -38,12 +40,14 @@
                               [style.height.px]="imageHeight"/>
                         <!--<img src="{{task.imageUrl}}"/> -->
                     </td>
-                    <td>{{task.title}}</td>
-                    <td>{{task.deadline | uppercase}}</td>
                     <td>
-                        <nn-star [priority]="task.priority" (priorityClicked)="onPriorityClicked($event)"></nn-star>
+                        <a [routerLink]="['TaskDetails', {id: task.id}]">{{task.title}}</a>
                     </td>
+                    <td>{{task.deadline}}</td>
                     <td>{{task.finished}}</td>
+                    <td>
+                        <button class="btn btn-primary" (click)="editTask(task.id)">Edit</button>
+                    </td>
                 </tr>
                 </tbody>
             </table>

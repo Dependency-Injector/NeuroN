@@ -39,15 +39,15 @@ namespace ApiNeuron.Controllers
         }
 
 
-        // POST api/values
+        // POST api/tasks
         [HttpPost]
         public IActionResult Create([FromBody]Task task)
         {
             if (task == null)
                 return BadRequest();
 
-            taskRepository.Add(task);
-            return CreatedAtRoute("Get", new { id = task.Id }, task);
+            Task addedTask = taskRepository.Add(task);
+            return new ObjectResult(addedTask); //CreatedAtRoute("Get", new { id = addedTask.Id }, addedTask);
         }
 
         // PUT api/values/5

@@ -1,6 +1,6 @@
 ﻿import { Injectable } from 'angular2/core';
 import { ITask, Task } from './task';
-import { Http, Response } from 'angular2/http';
+import { Http, Response, Headers, RequestOptions } from 'angular2/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 
@@ -8,23 +8,54 @@ import { Subject } from 'rxjs/Subject';
 
 export class TaskService {
     private azureTasksApiUrl = 'http://apineuro.azurewebsites.net/api/tasks';
+    private localApiUrl = 'http://localhost:2243/api/tasks';
     private tasksApiUrl = 'api/tasks/tasks.json';
     private tasks: ITask[] = [];
     private subject: Subject<ITask[]> = new Subject<ITask[]>();
     
     constructor(private http: Http) {
-        this.obtainTasksFromJson();
+        this.obtainTasksFromApi();
     }
 
-    addTask(newTask: ITask): void {
-        this.http.post(this.azureTasksApiUrl, JSON.stringify(newTask))
-            .map((responseData) => {
-                console.log("Returned data: ");
-                console.log(responseData);
-            });
+    createNewTask(title: string, deadline: string): ITask {
+        return new Task(null, title, deadline, false);
+    }
 
-        this.tasks.push(newTask);
-        this.subject.next(this.tasks);
+    createNewEmptyTask(): ITask {
+        return this.createNewTask('', new Date().toDateString());
+    }
+
+    saveTask(task: ITask): void {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Accept', 'application/json');
+        let options = new RequestOptions({ headers: headers });
+
+        if (task.id == null) {
+            this.http.post(this.localApiUrl, JSON.stringify(task), { headers: headers })
+                .map(responseData => {
+                    return responseData.json();
+                })
+                .catch(this.handleError)
+                .subscribe(data => {
+                    this.tasks.push(data);
+                    this.subject.next(this.tasks);
+                });
+        } else {
+            this.http.put(this.localApiUrl, JSON.stringify(task), { headers: headers })
+                .map(responseData => {
+                    return responseData.json();
+                })
+                .catch(this.handleError)
+                .subscribe(data => {
+                    let updatedTaskIndex = this.tasks.findIndex(t => t.id == data.id);
+
+                    if (updatedTaskIndex) {
+                        this.tasks[updatedTaskIndex] = data;
+                        this.subject.next(this.tasks);
+                    }
+                });
+        }
     }
 
     getTasks(): Observable<Task[]> {
@@ -32,10 +63,15 @@ export class TaskService {
     }
 
     getTask(id: number): ITask {
-        return this.tasks[0];
+        return this.tasks.find(t => t.id == id);
     }
 
-    private obtainTasksFromJson(): void {
+    private obtainTasksFromApi(): void {
+
+        let headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+
         // Obtains tasks from json file
         // Maps them to array of Task
         // Subscribes to itself (change this in future) and save obtained tasks
@@ -48,7 +84,7 @@ export class TaskService {
                 let result: Array<ITask> = [];
                 if (tasks) {
                     tasks.forEach((task) => {
-                        result.push(new Task(task.id, task.title, 3, '', false, ''));
+                        result.push(new Task(task.id, task.title, task.deadline, task.isFinished));
                     });
                     return result;
                 }

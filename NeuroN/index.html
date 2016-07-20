@@ -1,11 +1,12 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <base href="/"/>
     <title>Acme Product Management</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link href="app/app.component.css" rel="stylesheet" />
+    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
+    <link href="app/app.component.css" rel="stylesheet"/>
     <!-- 1. Load libraries -->
     <!-- IE required polyfills, in this exact order -->
     <script src="node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
@@ -17,12 +18,14 @@
     <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
 
     <script src="node_modules/angular2/bundles/http.dev.js"></script>
-    
+    <script src="node_modules/angular2/bundles/router.dev.js"></script>
+
     <!-- 2. Configure SystemJS -->
     <script>
         System.config({
             map: {
                 //'ng2-cookies': 'node_modules/ng2-cookies'
+            
             },
             packages: {
                 app: {
@@ -32,7 +35,7 @@
             }
         });
         System.import('app/main')
-              .then(null, console.error.bind(console));
+            .then(null, console.error.bind(console));
     </script>
 </head>
 

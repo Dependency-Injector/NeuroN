@@ -1,4 +1,4 @@
-System.register(['angular2/core', './task-filter.pipe', '../shared/star.component', './task.service'], function(exports_1, context_1) {
+System.register(['angular2/core', './task-filter.pipe', '../shared/star.component', './task.service', 'angular2/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './task-filter.pipe', '../shared/star.componen
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, task_filter_pipe_1, star_component_1, task_service_1;
+    var core_1, task_filter_pipe_1, star_component_1, task_service_1, router_1;
     var TaskListComponent;
     return {
         setters:[
@@ -25,11 +25,15 @@ System.register(['angular2/core', './task-filter.pipe', '../shared/star.componen
             },
             function (task_service_1_1) {
                 task_service_1 = task_service_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             }],
         execute: function() {
             let TaskListComponent = class TaskListComponent {
                 constructor(taskService) {
                     this.taskService = taskService;
+                    this.editTaskClicked = new core_1.EventEmitter();
                     this.imageHeight = 50;
                     this.imageWidth = 40;
                     this.showImage = false;
@@ -37,6 +41,9 @@ System.register(['angular2/core', './task-filter.pipe', '../shared/star.componen
                 }
                 toggleImage() {
                     this.showImage = !this.showImage;
+                }
+                editTask(taskId) {
+                    this.editTaskClicked.emit(taskId);
                 }
                 ngOnInit() {
                     this.taskService.getTasks()
@@ -59,13 +66,17 @@ System.register(['angular2/core', './task-filter.pipe', '../shared/star.componen
                 core_1.Input(), 
                 __metadata('design:type', String)
             ], TaskListComponent.prototype, "pageTitle", void 0);
+            __decorate([
+                core_1.Output(), 
+                __metadata('design:type', core_1.EventEmitter)
+            ], TaskListComponent.prototype, "editTaskClicked", void 0);
             TaskListComponent = __decorate([
                 core_1.Component({
                     selector: 'nn-task-list',
                     templateUrl: 'app/tasks/task-list.component.html',
                     styleUrls: ['app/tasks/task-list.component.css'],
                     pipes: [task_filter_pipe_1.TaskFilterPipe],
-                    directives: [star_component_1.StarComponent]
+                    directives: [star_component_1.StarComponent, router_1.ROUTER_DIRECTIVES]
                 }), 
                 __metadata('design:paramtypes', [task_service_1.TaskService])
             ], TaskListComponent);

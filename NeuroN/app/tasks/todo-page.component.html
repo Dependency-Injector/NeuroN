@@ -1,0 +1,3 @@
+﻿<nn-task-list [(tasks)]="tasks" [pageTitle]="taskListTitle" (editTaskClicked)="onEditTask($event)"></nn-task-list>
+
+<nn-edit-task (taskCreated)="onTaskCreated($event)" [(taskId)]="editedTaskId"></nn-edit-task>

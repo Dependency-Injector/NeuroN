@@ -1,6 +1,6 @@
 ﻿<div class="panel panel-primary">
     <div class="panel-heading">
-        Add / edit task
+        {{isInEditMode ? 'Edit' : 'Create'}} task
     </div>
     <div class="panel-body">
         <div class="row">
@@ -16,14 +16,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2">Priority</div>
             <div class="col-md-4">
-                <input type="text" [(ngModel)]="priority"/>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <button class="btn btn-primary" (click)="add()">Add</button>
+                <button class="btn btn-primary" (click)="create()" *ngIf="!isInEditMode">Create</button>
+                <button class="btn btn-primary" (click)="saveChanges()" *ngIf="isInEditMode">Save</button>
+                <button class="btn btn-primary" (click)="discardChanges()" *ngIf="isInEditMode">Cancel</button>
             </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './tasks/task-list.component', './tasks/edit-task.component', './tasks/task.service'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http', 'angular2/router', 'rxjs/Rx', './avatar/avatar.component', './tasks/todo-page.component', './tasks/task-details.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './tasks/task-list
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, task_list_component_1, edit_task_component_1, task_service_1;
+    var core_1, http_1, router_1, avatar_component_1, todo_page_component_1, task_details_component_1;
     var AppComponent;
     return {
         setters:[
@@ -20,38 +20,38 @@ System.register(['angular2/core', 'angular2/http', 'rxjs/Rx', './tasks/task-list
             function (http_1_1) {
                 http_1 = http_1_1;
             },
+            function (router_1_1) {
+                router_1 = router_1_1;
+            },
             function (_1) {},
-            function (task_list_component_1_1) {
-                task_list_component_1 = task_list_component_1_1;
+            function (avatar_component_1_1) {
+                avatar_component_1 = avatar_component_1_1;
             },
-            function (edit_task_component_1_1) {
-                edit_task_component_1 = edit_task_component_1_1;
+            function (todo_page_component_1_1) {
+                todo_page_component_1 = todo_page_component_1_1;
             },
-            function (task_service_1_1) {
-                task_service_1 = task_service_1_1;
+            function (task_details_component_1_1) {
+                task_details_component_1 = task_details_component_1_1;
             }],
         execute: function() {
             let AppComponent = class AppComponent {
                 constructor() {
                     this.pageTitle = 'Acme product management';
                     this.taskListTitle = 'Todo list';
-                    this.tasks = [];
-                }
-                onTaskAdded($event) {
-                    console.log('Event sent to app: ');
-                    console.log($event);
-                    var newTasks = [$event];
-                    this.tasks = this.tasks.concat(newTasks);
-                    this.taskListTitle = 'Todo list edited';
                 }
             };
             AppComponent = __decorate([
                 core_1.Component({
                     selector: 'nn-app',
                     templateUrl: 'app/app.component.html',
-                    directives: [task_list_component_1.TaskListComponent, edit_task_component_1.EditTaskComponent],
-                    providers: [task_service_1.TaskService, http_1.HTTP_PROVIDERS]
-                }), 
+                    directives: [router_1.ROUTER_DIRECTIVES],
+                    providers: [http_1.HTTP_PROVIDERS, router_1.ROUTER_PROVIDERS]
+                }),
+                router_1.RouteConfig([
+                    { path: '/tasks', name: 'Tasks', component: todo_page_component_1.TodoPageComponent, useAsDefault: true },
+                    { path: '/avatar', name: 'Avatar', component: avatar_component_1.AvatarComponent },
+                    { path: '/task-details/:id', name: 'TaskDetails', component: task_details_component_1.TaskDetailsComponent }
+                ]), 
                 __metadata('design:paramtypes', [])
             ], AppComponent);
             exports_1("AppComponent", AppComponent);

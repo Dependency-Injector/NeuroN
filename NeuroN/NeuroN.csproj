@@ -70,11 +70,14 @@
   <ItemGroup>
     <Content Include="app\app.component.js" />
     <Content Include="app\app.component.html" />
+    <Content Include="app\avatar\avatar.component.html" />
     <Content Include="app\main.js" />
+    <Content Include="app\tasks\task-details.component.html" />
     <Content Include="app\tasks\edit-task.component.html" />
     <Content Include="app\tasks\edit-task.component.css" />
     <Content Include="app\tasks\task-list.component.css" />
     <Content Include="app\tasks\task-list.component.html" />
+    <Content Include="app\tasks\todo-page.component.html" />
     <Content Include="node_modules\angular2\core.js" />
     <Content Include="packages.config" />
     <Content Include="api\tasks\tasks.json" />
@@ -106,14 +109,17 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\app.component.ts" />
+    <TypeScriptCompile Include="app\avatar\avatar.component.ts" />
     <TypeScriptCompile Include="app\home\welcome.component.ts" />
     <TypeScriptCompile Include="app\main.ts" />
     <TypeScriptCompile Include="app\shared\star.component.ts" />
     <TypeScriptCompile Include="app\tasks\edit-task.component.ts" />
+    <TypeScriptCompile Include="app\tasks\task-details.component.ts" />
     <TypeScriptCompile Include="app\tasks\task-filter.pipe.ts" />
     <TypeScriptCompile Include="app\tasks\task-list.component.ts" />
     <TypeScriptCompile Include="app\tasks\task.service.ts" />
     <TypeScriptCompile Include="app\tasks\task.ts" />
+    <TypeScriptCompile Include="app\tasks\todo-page.component.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

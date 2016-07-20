@@ -7,8 +7,8 @@ namespace ApiNeuron.Repositories
     {
         IEnumerable<Task> GetAll();
         Task Get(int id);
-        void Add(Task task);
-        void Update(Task task);
+        Task Add(Task task);
+        Task Update(Task task);
         Task Remove(int id);        
     }
 }

@@ -1,19 +1,21 @@
-﻿import { Component, Input, OnInit, OnChanges } from 'angular2/core';
+﻿import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from 'angular2/core';
 import { ITask } from './task';
 import { TaskFilterPipe } from './task-filter.pipe';
 import { StarComponent } from '../shared/star.component';
 import { TaskService } from './task.service';
+import { ROUTER_DIRECTIVES } from 'angular2/router';
 
 @Component({
     selector: 'nn-task-list',
     templateUrl: 'app/tasks/task-list.component.html',
     styleUrls: ['app/tasks/task-list.component.css'],
     pipes: [TaskFilterPipe],
-    directives: [StarComponent]
+    directives: [StarComponent, ROUTER_DIRECTIVES]
 })
 
 export class TaskListComponent implements OnInit, OnChanges {
     @Input() pageTitle: string;
+    @Output() editTaskClicked: EventEmitter<number> = new EventEmitter<number>();
 
     constructor(private taskService: TaskService) {
     }
@@ -26,6 +28,10 @@ export class TaskListComponent implements OnInit, OnChanges {
 
     toggleImage(): void {
         this.showImage = !this.showImage;
+    }
+
+    editTask(taskId: number): void {
+        this.editTaskClicked.emit(taskId);
     }
 
     errorMessage: any;

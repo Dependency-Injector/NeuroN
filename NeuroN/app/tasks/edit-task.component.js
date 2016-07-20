@@ -1,4 +1,4 @@
-System.register(['angular2/core', './task', './task.service'], function(exports_1, context_1) {
+System.register(['angular2/core', './task.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,15 +10,12 @@ System.register(['angular2/core', './task', './task.service'], function(exports_
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, task_1, task_service_1;
+    var core_1, task_service_1;
     var EditTaskComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (task_1_1) {
-                task_1 = task_1_1;
             },
             function (task_service_1_1) {
                 task_service_1 = task_service_1_1;
@@ -27,33 +24,53 @@ System.register(['angular2/core', './task', './task.service'], function(exports_
             let EditTaskComponent = class EditTaskComponent {
                 constructor(taskService) {
                     this.taskService = taskService;
-                    this.taskAdded = new core_1.EventEmitter();
-                    this.clear();
+                    this.taskCreated = new core_1.EventEmitter();
+                    this.isInEditMode = false;
                 }
-                add() {
-                    this.task = new task_1.Task;
-                    this.task.title = this.title;
-                    this.task.deadline = this.deadline;
-                    this.task.isFinished = false;
-                    this.task.priority = 2;
-                    this.taskService.addTask(this.task);
+                ngOnChanges(changes) {
+                    if (changes.taskId) {
+                        this.taskId = changes.taskId.currentValue;
+                        if (this.taskId == null) {
+                            this.task = this.taskService.createNewEmptyTask();
+                            this.isInEditMode = false;
+                        }
+                        else {
+                            this.task = this.taskService.getTask(this.taskId);
+                            this.title = this.task.title;
+                            this.deadline = this.task.deadline;
+                            this.isInEditMode = true;
+                        }
+                    }
+                }
+                create() {
+                    let newTask = this.taskService.createNewTask(this.title, this.deadline);
+                    this.taskService.saveTask(newTask);
                     this.clear();
                 }
                 saveChanges() {
+                    this.task.title = this.title;
+                    this.task.deadline = this.deadline;
+                    this.taskService.saveTask(this.task);
+                    this.clear();
                 }
                 discardChanges() {
                     this.clear();
                 }
                 clear() {
                     this.title = '';
-                    this.priority = 0;
                     this.deadline = new Date();
+                    this.task = this.taskService.createNewEmptyTask();
+                    this.isInEditMode = false;
                 }
             };
             __decorate([
+                core_1.Input(), 
+                __metadata('design:type', Number)
+            ], EditTaskComponent.prototype, "taskId", void 0);
+            __decorate([
                 core_1.Output(), 
                 __metadata('design:type', core_1.EventEmitter)
-            ], EditTaskComponent.prototype, "taskAdded", void 0);
+            ], EditTaskComponent.prototype, "taskCreated", void 0);
             EditTaskComponent = __decorate([
                 core_1.Component({
                     selector: 'nn-edit-task',

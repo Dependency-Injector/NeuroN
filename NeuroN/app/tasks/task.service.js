@@ -34,27 +34,59 @@ System.register(['angular2/core', './task', 'angular2/http', 'rxjs/Observable', 
                 constructor(http) {
                     this.http = http;
                     this.azureTasksApiUrl = 'http://apineuro.azurewebsites.net/api/tasks';
+                    this.localApiUrl = 'http://localhost:2243/api/tasks';
                     this.tasksApiUrl = 'api/tasks/tasks.json';
                     this.tasks = [];
                     this.subject = new Subject_1.Subject();
-                    this.obtainTasksFromJson();
+                    this.obtainTasksFromApi();
                 }
-                addTask(newTask) {
-                    this.http.post(this.azureTasksApiUrl, JSON.stringify(newTask))
-                        .map((responseData) => {
-                        console.log("Returned data: ");
-                        console.log(responseData);
-                    });
-                    this.tasks.push(newTask);
-                    this.subject.next(this.tasks);
+                createNewTask(title, deadline) {
+                    return new task_1.Task(null, title, deadline, false);
+                }
+                createNewEmptyTask() {
+                    return this.createNewTask('', new Date().toDateString());
+                }
+                saveTask(task) {
+                    let headers = new http_1.Headers();
+                    headers.append('Content-Type', 'application/json');
+                    headers.append('Accept', 'application/json');
+                    let options = new http_1.RequestOptions({ headers: headers });
+                    if (task.id == null) {
+                        this.http.post(this.localApiUrl, JSON.stringify(task), { headers: headers })
+                            .map(responseData => {
+                            return responseData.json();
+                        })
+                            .catch(this.handleError)
+                            .subscribe(data => {
+                            this.tasks.push(data);
+                            this.subject.next(this.tasks);
+                        });
+                    }
+                    else {
+                        this.http.put(this.localApiUrl, JSON.stringify(task), { headers: headers })
+                            .map(responseData => {
+                            return responseData.json();
+                        })
+                            .catch(this.handleError)
+                            .subscribe(data => {
+                            let updatedTaskIndex = this.tasks.findIndex(t => t.id == data.id);
+                            if (updatedTaskIndex) {
+                                this.tasks[updatedTaskIndex] = data;
+                                this.subject.next(this.tasks);
+                            }
+                        });
+                    }
                 }
                 getTasks() {
                     return this.subject.asObservable();
                 }
                 getTask(id) {
-                    return this.tasks[0];
+                    return this.tasks.find(t => t.id == id);
                 }
-                obtainTasksFromJson() {
+                obtainTasksFromApi() {
+                    let headers = new http_1.Headers({
+                        'Content-Type': 'application/json'
+                    });
                     // Obtains tasks from json file
                     // Maps them to array of Task
                     // Subscribes to itself (change this in future) and save obtained tasks
@@ -67,7 +99,7 @@ System.register(['angular2/core', './task', 'angular2/http', 'rxjs/Observable', 
                         let result = [];
                         if (tasks) {
                             tasks.forEach((task) => {
-                                result.push(new task_1.Task(task.id, task.title, 3, '', false, ''));
+                                result.push(new task_1.Task(task.id, task.title, task.deadline, task.isFinished));
                             });
                             return result;
                         }

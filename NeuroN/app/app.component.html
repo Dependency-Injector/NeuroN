@@ -1,8 +1,16 @@
 ﻿<div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <a class="navbar-brand">{{pageTitle}}</a>
+            <ul class="nav navbar-nav">
+                <li><a href="#">Home</a></li>
+                <li><a [routerLink]="['Tasks']">Todo</a></li>
+                <li><a [routerLink]="['Avatar']">Avatar</a></li>
+            </ul>
 
-    <h1>{{pageTitle}}</h1>
-
-    <nn-task-list [(tasks)]="tasks" [pageTitle]="taskListTitle"></nn-task-list>
-
-    <nn-edit-task (taskAdded)="onTaskAdded($event)"></nn-edit-task>
-</div>'
+        </div>
+    </nav>
+    <div class="container">
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -1,7 +1,6 @@
 ﻿using ApiNeuron.Models;
 using ApiNeuron.Repositories;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,18 +26,19 @@ namespace ApiNeuron
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection =
-                @"Server=tcp:neuronserver.database.windows.net,1433;Initial Catalog=NeuronDb;Persist Security Info=False;User ID=dmitru;Password=zaq1@WSX;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-            //var connection2 = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;";
+            var connection = @"Server=tcp:neuronserver.database.windows.net,1433;Initial Catalog=NeuronDb;Persist Security Info=False;User ID=dmitru;Password=zaq1@WSX;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+                
             services.AddDbContext<NeuronContext>(options => options.UseSqlServer(connection));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("MyPolicy", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
+
 
             // Add framework services.
             services.AddMvc();
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("MyPolicy", builder => builder.AllowAnyOrigin());
-            });
             services.AddSingleton<ITaskRepository, TaskRepository>();
         }
 
