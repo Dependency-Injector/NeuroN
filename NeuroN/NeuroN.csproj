@@ -68,16 +68,22 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\app.component.js" />
     <Content Include="app\app.component.html" />
     <Content Include="app\avatar\avatar.component.html" />
     <Content Include="app\main.js" />
+    <Content Include="app\shared\menu\menu-item.component.css" />
+    <Content Include="app\shared\menu\menu-item.component.html" />
+    <Content Include="app\shared\menu\menu.component.css" />
+    <Content Include="app\shared\menu\menu.component.html" />
     <Content Include="app\tasks\task-details.component.html" />
     <Content Include="app\tasks\edit-task.component.html" />
     <Content Include="app\tasks\edit-task.component.css" />
     <Content Include="app\tasks\task-list.component.css" />
     <Content Include="app\tasks\task-list.component.html" />
     <Content Include="app\tasks\todo-page.component.html" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="node_modules\angular2\core.js" />
     <Content Include="packages.config" />
     <Content Include="api\tasks\tasks.json" />
@@ -85,8 +91,12 @@
     <Content Include="package.json" />
     <Content Include="tsconfig.json" />
     <Content Include="typings.json" />
-    <Content Include="app\app.component.js.map" />
     <Content Include="app\main.js.map" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -112,6 +122,8 @@
     <TypeScriptCompile Include="app\avatar\avatar.component.ts" />
     <TypeScriptCompile Include="app\home\welcome.component.ts" />
     <TypeScriptCompile Include="app\main.ts" />
+    <TypeScriptCompile Include="app\shared\menu\menu-item.component.ts" />
+    <TypeScriptCompile Include="app\shared\menu\menu.component.ts" />
     <TypeScriptCompile Include="app\shared\star.component.ts" />
     <TypeScriptCompile Include="app\tasks\edit-task.component.ts" />
     <TypeScriptCompile Include="app\tasks\task-details.component.ts" />

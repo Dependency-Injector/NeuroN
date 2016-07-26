@@ -1,12 +1,17 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <base href="/"/>
+    <base href="/" />
     <title>Acme Product Management</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet"/>
-    <link href="app/app.component.css" rel="stylesheet"/>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="Content/font-awesome.min.css" rel="stylesheet" />
+
+    <link href="app/app.component.css" rel="stylesheet" />
+    <link href="app/shared/menu/menu.component.css" rel="stylesheet" />
+    <link href="app/shared/menu/menu-item.component.css" rel="stylesheet" />
+
     <!-- 1. Load libraries -->
     <!-- IE required polyfills, in this exact order -->
     <script src="node_modules/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
@@ -25,7 +30,7 @@
         System.config({
             map: {
                 //'ng2-cookies': 'node_modules/ng2-cookies'
-            
+
             },
             packages: {
                 app: {
@@ -39,8 +44,11 @@
     </script>
 </head>
 
-<body>
+<body class="container-fluid">
+
     <nn-app>Loading...</nn-app>
+
     Starter files for Angular2: Getting Started
 </body>
+
 </html>

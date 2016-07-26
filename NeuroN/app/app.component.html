@@ -1,5 +1,5 @@
-﻿<div>
-    <nav class="navbar navbar-default">
+﻿<div id="wrapper">
+    <!--<nav class="navbar navbar-default">
         <div class="container-fluid">
             <a class="navbar-brand">{{pageTitle}}</a>
             <ul class="nav navbar-nav">
@@ -9,8 +9,26 @@
             </ul>
 
         </div>
-    </nav>
-    <div class="container">
+    </nav>-->
+
+    <div id="sidebar-wrapper">
+        
+                <h4>
+                    NeuroN Framework
+                </h4>
+
+            <nn-menu (routeSelected)="onRouteSelected($event)">
+                <nn-menu-item label="What's new" icon="fa-tachometer"></nn-menu-item>
+                <nn-menu-item label="Todo" icon="fa-check" route="Tasks"></nn-menu-item>
+                <nn-menu-item label="Avatar" icon="fa-user"></nn-menu-item>
+            </nn-menu>
+    
+    </div>
+
+    <div class="container-fluid">
         <router-outlet></router-outlet>
     </div>
 </div>
+
+
+     

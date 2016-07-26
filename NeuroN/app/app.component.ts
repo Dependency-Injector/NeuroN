@@ -7,12 +7,13 @@ import { ITask, Task } from './tasks/task';
 import { AvatarComponent } from './avatar/avatar.component';
 import { TodoPageComponent } from './tasks/todo-page.component';
 import { TaskDetailsComponent } from './tasks/task-details.component';
-
+import { MenuComponent } from './shared/menu/menu.component';
+import { MenuItemComponent } from './shared/menu/menu-item.component';
 
 @Component({
     selector: 'nn-app',
     templateUrl: 'app/app.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, MenuComponent, MenuItemComponent],
     providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS]
 })
 
@@ -36,4 +37,7 @@ export class AppComponent {
     }
 
     tasks: ITask[] = [];*/
+    onRouteSelected($event: string): void {
+        console.log($event);
+    }
 }
