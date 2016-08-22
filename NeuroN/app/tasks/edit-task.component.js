@@ -1,4 +1,4 @@
-System.register(['angular2/core', './task.service'], function(exports_1, context_1) {
+System.register(['@angular/core', './task.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -44,13 +44,23 @@ System.register(['angular2/core', './task.service'], function(exports_1, context
                 }
                 create() {
                     let newTask = this.taskService.createNewTask(this.title, this.deadline);
-                    this.taskService.saveTask(newTask);
+                    //this.taskService.saveTask(newTask);
+                    this.taskService.addTodo(newTask);
                     this.clear();
+                }
+                remove() {
+                    this.taskService.removeTask(this.task);
                 }
                 saveChanges() {
                     this.task.title = this.title;
                     this.task.deadline = this.deadline;
-                    this.taskService.saveTask(this.task);
+                    this.taskService.addTodo(this.task)
+                        .subscribe(res => {
+                        console.log(res);
+                    }, err => {
+                        console.log(err);
+                    });
+                    //this.taskService.saveTask(this.task);
                     this.clear();
                 }
                 discardChanges() {
@@ -61,6 +71,10 @@ System.register(['angular2/core', './task.service'], function(exports_1, context
                     this.deadline = new Date();
                     this.task = this.taskService.createNewEmptyTask();
                     this.isInEditMode = false;
+                }
+                initializeUi(title, deadline) {
+                    this.title = title;
+                    this.deadline = deadline;
                 }
             };
             __decorate([

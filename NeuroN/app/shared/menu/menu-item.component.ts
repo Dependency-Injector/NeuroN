@@ -1,5 +1,4 @@
-﻿import { Component, OnChanges, Input,
-    Output, EventEmitter } from 'angular2/core';
+﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'nn-menu-item', 
@@ -10,16 +9,13 @@
     }
 })
 
-export class MenuItemComponent implements OnChanges {
+export class MenuItemComponent {
     @Input() label: string;
     @Input() icon: string;
     @Input() route: string;
-    @Output() routeSelected: EventEmitter<string> = new EventEmitter<string>();
+    @Output() menuItemSelected: EventEmitter<string> = new EventEmitter<string>();
     
-    ngOnChanges(): void {
-    }
-
-    menuItemClicked($event): void {
-        this.routeSelected.emit(this.route);
+    menuItemClicked(): void {
+        this.menuItemSelected.emit(this.route);
     }
 }

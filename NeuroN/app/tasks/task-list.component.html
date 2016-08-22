@@ -19,9 +19,9 @@
         <table class="table" *ngIf='tasks && tasks.length'>
                 <thead>
                 <tr>
-                    <th>
+                    <!--<th>
                         <button class="btn btn-primary" (click)="toggleImage()">{{showImage ? 'Hide' : 'Show'}} image</button>
-                    </th>
+                    </th>-->
                     <th>Title</th>
                     <th>Deadline</th>
                     <!--<th>Priority</th>-->
@@ -29,27 +29,35 @@
                     <th>Actions</th>
                 </tr>
                 </thead>
-                <tbody>
-                <!--<tr *ngFor="#task of tasks | taskFilter:listFilter">-->
-                <tr *ngFor="#task of tasks">
-                    <td>
-                        <img *ngIf="showImage"
-                              [src]="task.imageUrl"
-                              [title]="task.title"
-                              [style.width.px]="imageWidth" 
-                              [style.height.px]="imageHeight"/>
-                        <!--<img src="{{task.imageUrl}}"/> -->
-                    </td>
-                    <td>
-                        <a [routerLink]="['TaskDetails', {id: task.id}]">{{task.title}}</a>
-                    </td>
-                    <td>{{task.deadline}}</td>
-                    <td>{{task.finished}}</td>
-                    <td>
-                        <button class="btn btn-primary" (click)="editTask(task.id)">Edit</button>
-                    </td>
-                </tr>
-                </tbody>
+            <tbody>
+            <!--<tr *ngFor="#task of tasks | taskFilter:listFilter">-->
+            <tr *ngFor="#task of tasks">
+                <!-- <td>
+                    <img *ngIf="showImage"
+                         [src]="task.imageUrl"
+                         [title]="task.title"
+                         [style.width.px]="imageWidth"
+                         [style.height.px]="imageHeight"/>
+                    $1$<img src="{{task.imageUrl}}"/> #1#
+                </td>-->
+                <td>
+                    <a [routerLink]="['TaskDetails', {id: task.id}]">{{task.title}}</a>
+                </td>
+                <td>{{setDate(task.deadline) | date}}</td>
+                <td>{{task.finished}}</td>
+                <td>
+                    <button class="btn btn-primary" (click)="editTask(task.id)">Edit</button>
+                    <button class="btn btn-primary" (click)="finishTask(task.id)">Finish</button>
+                </td>
+            </tr>
+            </tbody>
+            <!--<tfoot>
+            <tr>
+                <td>
+                    <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
+                </td>
+            </tr>
+            </tfoot>-->
             </table>
         </div>
     </div>

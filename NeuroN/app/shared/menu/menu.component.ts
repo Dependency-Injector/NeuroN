@@ -1,5 +1,4 @@
-﻿import { Component, OnChanges, Input,
-    Output, EventEmitter } from 'angular2/core';
+﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { MenuItemComponent } from './menu-item.component';
 
@@ -13,16 +12,5 @@ import { MenuItemComponent } from './menu-item.component';
     directives: [MenuItemComponent]
 })
 
-export class MenuComponent implements OnChanges {
-    //@Input() priority: number;
-    //starWidth: number;
-    //@Output() priorityClicked: EventEmitter<string> = new EventEmitter<string>();
-
-    ngOnChanges(): void {
-        //this.starWidth = this.priority * 86 / 5;
-    }
-
-    onClick() {
-        //this.priorityClicked.emit('The priority ' + this.priority + ' clicked');
-    }
+export class MenuComponent {
 }

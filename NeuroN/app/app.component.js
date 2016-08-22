@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/http', 'angular2/router', 'rxjs/Rx', './avatar/avatar.component', './tasks/todo-page.component', './tasks/task-details.component', './shared/menu/menu.component', './shared/menu/menu-item.component'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/http', '@angular/router', 'rxjs/Rx', './shared/menu/menu.component', './shared/menu/menu-item.component', './utilities/apiHelper.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', 'rxjs/Rx',
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, http_1, router_1, avatar_component_1, todo_page_component_1, task_details_component_1, menu_component_1, menu_item_component_1;
+    var core_1, http_1, router_1, menu_component_1, menu_item_component_1, apiHelper_service_1;
     var AppComponent;
     return {
         setters:[
@@ -24,25 +24,20 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', 'rxjs/Rx',
                 router_1 = router_1_1;
             },
             function (_1) {},
-            function (avatar_component_1_1) {
-                avatar_component_1 = avatar_component_1_1;
-            },
-            function (todo_page_component_1_1) {
-                todo_page_component_1 = todo_page_component_1_1;
-            },
-            function (task_details_component_1_1) {
-                task_details_component_1 = task_details_component_1_1;
-            },
             function (menu_component_1_1) {
                 menu_component_1 = menu_component_1_1;
             },
             function (menu_item_component_1_1) {
                 menu_item_component_1 = menu_item_component_1_1;
+            },
+            function (apiHelper_service_1_1) {
+                apiHelper_service_1 = apiHelper_service_1_1;
             }],
         execute: function() {
             let AppComponent = class AppComponent {
-                constructor() {
-                    this.pageTitle = 'Acme product management';
+                constructor(router) {
+                    this.router = router;
+                    this.pageTitle = 'NeuroN FrameworK';
                     this.taskListTitle = 'Todo list';
                 }
                 /*onTaskAdded($event) {
@@ -55,23 +50,19 @@ System.register(['angular2/core', 'angular2/http', 'angular2/router', 'rxjs/Rx',
                 }
             
                 tasks: ITask[] = [];*/
-                onRouteSelected($event) {
-                    console.log($event);
+                onRouteSelected(route) {
+                    console.log(route);
+                    this.router.navigate([route]);
                 }
             };
             AppComponent = __decorate([
                 core_1.Component({
                     selector: 'nn-app',
                     templateUrl: 'app/app.component.html',
-                    directives: [router_1.ROUTER_DIRECTIVES, menu_component_1.MenuComponent, menu_item_component_1.MenuItemComponent],
-                    providers: [http_1.HTTP_PROVIDERS, router_1.ROUTER_PROVIDERS]
-                }),
-                router_1.RouteConfig([
-                    { path: '/tasks', name: 'Tasks', component: todo_page_component_1.TodoPageComponent, useAsDefault: true },
-                    { path: '/avatar', name: 'Avatar', component: avatar_component_1.AvatarComponent },
-                    { path: '/task-details/:id', name: 'TaskDetails', component: task_details_component_1.TaskDetailsComponent }
-                ]), 
-                __metadata('design:paramtypes', [])
+                    directives: [menu_component_1.MenuComponent, menu_item_component_1.MenuItemComponent],
+                    providers: [http_1.HTTP_PROVIDERS, apiHelper_service_1.ApiHelper]
+                }), 
+                __metadata('design:paramtypes', [router_1.Router])
             ], AppComponent);
             exports_1("AppComponent", AppComponent);
         }

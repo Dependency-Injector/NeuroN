@@ -1,4 +1,5 @@
-﻿import { Component, Input, Output, OnChanges, EventEmitter } from 'angular2/core'
+﻿import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core';
+/*import { DatePicker } from 'ng2-datepicker';*/
 import { ITask, Task } from './task';
 import { TaskService } from './task.service';
 
@@ -6,6 +7,7 @@ import { TaskService } from './task.service';
     selector: 'nn-edit-task',
     templateUrl: 'app/tasks/edit-task.component.html',
     styleUrls: ['app/tasks/edit-task.component.css']
+    /*directives: [DatePicker]*/
 })
 
 export class EditTaskComponent implements OnChanges {
@@ -39,14 +41,29 @@ export class EditTaskComponent implements OnChanges {
 
     create(): void {
         let newTask: ITask = this.taskService.createNewTask(this.title, this.deadline);
-        this.taskService.saveTask(newTask);
+        //this.taskService.saveTask(newTask);
+        this.taskService.addTodo(newTask);
         this.clear();
+    }
+
+    remove(): void {
+        this.taskService.removeTask(this.task);
     }
 
     saveChanges(): void {
         this.task.title = this.title;
         this.task.deadline = this.deadline;
-        this.taskService.saveTask(this.task);
+
+        this.taskService.addTodo(this.task)
+            .subscribe(
+                res => {
+                    console.log(res);
+                },
+                err => {
+                    console.log(err);
+                });
+
+        //this.taskService.saveTask(this.task);
         this.clear();
     }
 
@@ -59,5 +76,10 @@ export class EditTaskComponent implements OnChanges {
         this.deadline = new Date();
         this.task = this.taskService.createNewEmptyTask();
         this.isInEditMode = false;
+    }
+
+    initializeUi(title: string, deadline: string): void {
+        this.title = title;
+        this.deadline = deadline;
     }
 }

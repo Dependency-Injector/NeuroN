@@ -1,5 +1,5 @@
-﻿import { Component } from 'angular2/core';
-import { RouteParams } from 'angular2/router';
+﻿import { Component } from '@angular/core';
+//import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
     templateUrl: 'app/avatar/avatar.component.html'
@@ -8,7 +8,7 @@ import { RouteParams } from 'angular2/router';
 export class AvatarComponent {
     pageTitle: string = 'avatar page';
 
-    constructor(private routeParams: RouteParams) {
-        this.pageTitle = this.pageTitle + " . Route params: " + this.routeParams.get('id');
+    constructor() {
+        this.pageTitle = this.pageTitle + " . Route params: ";// + this.routeParams.get('id');
     }
 }

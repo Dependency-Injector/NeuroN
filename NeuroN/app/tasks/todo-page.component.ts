@@ -1,4 +1,4 @@
-﻿import { Component } from 'angular2/core';
+﻿import { Component } from '@angular/core';
 import 'rxjs/Rx';   // load all features
 
 import { ITask, Task } from './task';

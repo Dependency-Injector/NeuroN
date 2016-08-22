@@ -1,5 +1,6 @@
-﻿import { Component } from 'angular2/core';
-import { RouteParams, Router } from 'angular2/router';
+﻿import { Component } from '@angular/core';
+/*import { RouteParams, Router } from '@angular/router-deprecated';*/
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
     templateUrl: 'app/tasks/task-details.component.html'
@@ -8,12 +9,14 @@ import { RouteParams, Router } from 'angular2/router';
 export class TaskDetailsComponent {
     pageTitle: string = 'Task details';
 
-    constructor(private _routeParams: RouteParams, private _router: Router) {
-        let id = +this._routeParams.get('id');
-        this.pageTitle += `: ${id}`;
+    constructor(private route: ActivatedRoute) {
+        //let link = ['/detail', hero.id];
+        //this.router.navigate(link);
+        //let id = +this._routeParams.get('id');
+        //this.pageTitle += `: ${id}`;
     }
 
     onBack(): void {
-        this._router.navigate(['Tasks']);
+        //this._router.navigate(['Tasks']);
     }
 }

@@ -42,7 +42,10 @@ namespace ApiNeuron.Repositories
         {
             Task taskToRemove = Get(id);
             if (taskToRemove != null)
+            {
                 context.Tasks.Remove(taskToRemove);
+                context.SaveChanges();
+            }
 
             return taskToRemove;
         }

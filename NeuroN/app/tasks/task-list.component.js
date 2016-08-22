@@ -1,4 +1,4 @@
-System.register(['angular2/core', './task-filter.pipe', '../shared/star.component', './task.service', 'angular2/router'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/router', './task-filter.pipe', '../shared/star.component', './task.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,12 +10,15 @@ System.register(['angular2/core', './task-filter.pipe', '../shared/star.componen
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, task_filter_pipe_1, star_component_1, task_service_1, router_1;
+    var core_1, router_1, task_filter_pipe_1, star_component_1, task_service_1;
     var TaskListComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (router_1_1) {
+                router_1 = router_1_1;
             },
             function (task_filter_pipe_1_1) {
                 task_filter_pipe_1 = task_filter_pipe_1_1;
@@ -25,9 +28,6 @@ System.register(['angular2/core', './task-filter.pipe', '../shared/star.componen
             },
             function (task_service_1_1) {
                 task_service_1 = task_service_1_1;
-            },
-            function (router_1_1) {
-                router_1 = router_1_1;
             }],
         execute: function() {
             let TaskListComponent = class TaskListComponent {
@@ -45,12 +45,24 @@ System.register(['angular2/core', './task-filter.pipe', '../shared/star.componen
                 editTask(taskId) {
                     this.editTaskClicked.emit(taskId);
                 }
+                finishTask(taskId) {
+                    this.taskService.finishTask(taskId);
+                }
+                setDate(date) {
+                    return new Date(date);
+                }
                 ngOnInit() {
-                    this.taskService.getTasks()
-                        .subscribe((tasks) => {
+                    this.taskService.todos.subscribe((tasks) => {
                         this.tasks = tasks;
-                        console.log('tasks list updated in task-list');
+                        console.log('task list has new list');
                     });
+                    /*
+                            this.taskService.getTasks()
+                                .subscribe((tasks: ITask[]) => {
+                                    this.tasks = tasks;
+                                    console.log('tasks list updated in task-list');
+                                });
+                    */
                 }
                 ngOnChanges(changes) {
                     if (changes.tasks)

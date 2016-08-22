@@ -1,9 +1,9 @@
-﻿import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from 'angular2/core';
+﻿import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 import { ITask } from './task';
 import { TaskFilterPipe } from './task-filter.pipe';
 import { StarComponent } from '../shared/star.component';
 import { TaskService } from './task.service';
-import { ROUTER_DIRECTIVES } from 'angular2/router';
 
 @Component({
     selector: 'nn-task-list',
@@ -34,13 +34,29 @@ export class TaskListComponent implements OnInit, OnChanges {
         this.editTaskClicked.emit(taskId);
     }
 
+    finishTask(taskId: number): void {
+        this.taskService.finishTask(taskId);
+    }
+
     errorMessage: any;
+
+    setDate(date: string): Date {
+        return new Date(date);
+    }
+
     ngOnInit(): void {
+        this.taskService.todos.subscribe((tasks: ITask[]) => {
+            this.tasks = tasks;
+            console.log('task list has new list');
+        });
+
+/*
         this.taskService.getTasks()
             .subscribe((tasks: ITask[]) => {
                 this.tasks = tasks;
                 console.log('tasks list updated in task-list');
             });
+*/
     }
 
     ngOnChanges(changes): void {

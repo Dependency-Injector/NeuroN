@@ -1,28 +1,14 @@
 ﻿<div id="wrapper">
-    <!--<nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <a class="navbar-brand">{{pageTitle}}</a>
-            <ul class="nav navbar-nav">
-                <li><a href="#">Home</a></li>
-                <li><a [routerLink]="['Tasks']">Todo</a></li>
-                <li><a [routerLink]="['Avatar']">Avatar</a></li>
-            </ul>
-
-        </div>
-    </nav>-->
-
     <div id="sidebar-wrapper">
-        
-                <h4>
-                    NeuroN Framework
-                </h4>
+        <h4>
+            NeuroN Framework
+        </h4>
 
-            <nn-menu (routeSelected)="onRouteSelected($event)">
-                <nn-menu-item label="What's new" icon="fa-tachometer"></nn-menu-item>
-                <nn-menu-item label="Todo" icon="fa-check" route="Tasks"></nn-menu-item>
-                <nn-menu-item label="Avatar" icon="fa-user"></nn-menu-item>
-            </nn-menu>
-    
+        <nn-menu>
+            <nn-menu-item label="What's new" icon="fa-tachometer" route="Blog" (menuItemSelected)="onRouteSelected($event)"></nn-menu-item>
+            <nn-menu-item label="Todo" icon="fa-check" route="tasks" (menuItemSelected)="onRouteSelected($event)"></nn-menu-item>
+            <nn-menu-item label="Avatar" icon="fa-user" route="avatar" (menuItemSelected)="onRouteSelected($event)"></nn-menu-item>
+        </nn-menu>
     </div>
 
     <div class="container-fluid">
@@ -31,4 +17,3 @@
 </div>
 
 
-     

@@ -1,10 +1,11 @@
 ﻿<div class="row">
     <div class="col-md-12">
-        <nn-task-list [(tasks)]="tasks" [pageTitle]="taskListTitle" (editTaskClicked)="onEditTask($event)"></nn-task-list>
+        <nn-edit-task (taskCreated)="onTaskCreated($event)" [(taskId)]="editedTaskId"></nn-edit-task>
     </div>
 </div>
 <div class="row">
     <div class="col-md-12">
-        <nn-edit-task (taskCreated)="onTaskCreated($event)" [(taskId)]="editedTaskId"></nn-edit-task>
+        <nn-task-list [pageTitle]="taskListTitle" (editTaskClicked)="onEditTask($event)"></nn-task-list>
     </div>
 </div>
+
