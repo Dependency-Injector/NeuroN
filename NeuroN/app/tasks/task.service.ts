@@ -105,9 +105,22 @@ export class TaskService {
     }
     
     saveTask(task: ITask): void {
-
+        // New task - save by POST
         if (task.id == null) {
             this.http.post(this.localApiUrl, JSON.stringify(task), this.jsonHeaders)
+                .map((response: Response) => {
+                    return response.json();
+                })
+                .catch(this.handleError)
+                .subscribe(task => {
+                    let createdTask = new Task(task.id, task.title, task.deadline, task.isFinished);
+                    this.tasks.push(createdTask);
+                    this._todos.next(this.tasks);
+
+                    //this.subject.next(this.tasks);
+                });
+
+            /*this.http.post(this.localApiUrl, JSON.stringify(task), this.jsonHeaders)
                 .map(responseData => {
                     return responseData.json();
                 })
@@ -116,9 +129,11 @@ export class TaskService {
                     this.tasks.push(data);
                     this._todos.next(this.tasks);
                     //this.subject.next(this.tasks);
-                });
-        } else {
-            this.http.put(this.localApiUrl, JSON.stringify(task), this.jsonHeaders)
+                });*/
+        }
+        // Existing task - update by PUT
+        else {
+            this.http.put(this.localApiUrl + '/' + task.id, JSON.stringify(task), this.jsonHeaders)
                 .map(responseData => {
                     return responseData.json();
                 })

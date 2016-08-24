@@ -1,4 +1,4 @@
-System.register(['@angular/core', './task.service'], function(exports_1, context_1) {
+System.register(['@angular/core', './task.service', 'ng2-bootstrap/ng2-bootstrap'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', './task.service'], function(exports_1, context
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, task_service_1;
+    var core_1, task_service_1, ng2_bootstrap_1, ng2_bootstrap_2;
     var EditTaskComponent;
     return {
         setters:[
@@ -19,6 +19,10 @@ System.register(['@angular/core', './task.service'], function(exports_1, context
             },
             function (task_service_1_1) {
                 task_service_1 = task_service_1_1;
+            },
+            function (ng2_bootstrap_1_1) {
+                ng2_bootstrap_1 = ng2_bootstrap_1_1;
+                ng2_bootstrap_2 = ng2_bootstrap_1_1;
             }],
         execute: function() {
             let EditTaskComponent = class EditTaskComponent {
@@ -31,7 +35,7 @@ System.register(['@angular/core', './task.service'], function(exports_1, context
                     if (changes.taskId) {
                         this.taskId = changes.taskId.currentValue;
                         if (this.taskId == null) {
-                            this.task = this.taskService.createNewEmptyTask();
+                            this.task = null;
                             this.isInEditMode = false;
                         }
                         else {
@@ -42,11 +46,10 @@ System.register(['@angular/core', './task.service'], function(exports_1, context
                         }
                     }
                 }
-                create() {
+                createNew() {
                     let newTask = this.taskService.createNewTask(this.title, this.deadline);
-                    //this.taskService.saveTask(newTask);
-                    this.taskService.addTodo(newTask);
-                    this.clear();
+                    this.taskService.saveTask(newTask);
+                    this.clearUi();
                 }
                 remove() {
                     this.taskService.removeTask(this.task);
@@ -54,27 +57,31 @@ System.register(['@angular/core', './task.service'], function(exports_1, context
                 saveChanges() {
                     this.task.title = this.title;
                     this.task.deadline = this.deadline;
-                    this.taskService.addTodo(this.task)
-                        .subscribe(res => {
-                        console.log(res);
-                    }, err => {
-                        console.log(err);
-                    });
+                    this.taskService.saveTask(this.task);
+                    /*
+                                .addTodo(this.task)
+                                .subscribe(
+                                    res => {
+                                        console.log(res);
+                                    },
+                                    err => {
+                                        console.log(err);
+                                    });
+                    */
                     //this.taskService.saveTask(this.task);
-                    this.clear();
+                    this.clearUi();
                 }
                 discardChanges() {
-                    this.clear();
+                    this.clearUi();
                 }
-                clear() {
+                clearUi() {
                     this.title = '';
                     this.deadline = new Date();
-                    this.task = this.taskService.createNewEmptyTask();
                     this.isInEditMode = false;
                 }
                 initializeUi(title, deadline) {
-                    this.title = title;
-                    this.deadline = deadline;
+                    //this.title = title;
+                    //this.deadline = deadline;
                 }
             };
             __decorate([
@@ -89,7 +96,8 @@ System.register(['@angular/core', './task.service'], function(exports_1, context
                 core_1.Component({
                     selector: 'nn-edit-task',
                     templateUrl: 'app/tasks/edit-task.component.html',
-                    styleUrls: ['app/tasks/edit-task.component.css']
+                    styleUrls: ['app/tasks/edit-task.component.css'],
+                    directives: [ng2_bootstrap_1.AlertComponent, ng2_bootstrap_2.DATEPICKER_DIRECTIVES]
                 }), 
                 __metadata('design:paramtypes', [task_service_1.TaskService])
             ], EditTaskComponent);

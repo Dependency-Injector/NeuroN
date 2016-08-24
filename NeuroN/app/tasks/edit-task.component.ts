@@ -1,24 +1,26 @@
 ﻿import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core';
-/*import { DatePicker } from 'ng2-datepicker';*/
 import { ITask, Task } from './task';
 import { TaskService } from './task.service';
+import {AlertComponent} from 'ng2-bootstrap/ng2-bootstrap';
+import { DATEPICKER_DIRECTIVES } from 'ng2-bootstrap/ng2-bootstrap';
 
 @Component({
     selector: 'nn-edit-task',
     templateUrl: 'app/tasks/edit-task.component.html',
-    styleUrls: ['app/tasks/edit-task.component.css']
-    /*directives: [DatePicker]*/
+    styleUrls: ['app/tasks/edit-task.component.css'],
+    directives: [AlertComponent, DATEPICKER_DIRECTIVES]
 })
 
 export class EditTaskComponent implements OnChanges {
     @Input() taskId: number;
     @Output() taskCreated: EventEmitter<ITask> = new EventEmitter<ITask>();
 
-    private task: ITask;
     private isInEditMode: boolean = false;
 
     private title: string;
     private deadline: any;
+
+    private task: ITask;
 
     constructor(private taskService: TaskService) {
     }
@@ -28,7 +30,7 @@ export class EditTaskComponent implements OnChanges {
             this.taskId = changes.taskId.currentValue;
 
             if (this.taskId == null) {
-                this.task = this.taskService.createNewEmptyTask();
+                this.task = null;
                 this.isInEditMode = false;
             } else {
                 this.task = this.taskService.getTask(this.taskId);
@@ -39,11 +41,10 @@ export class EditTaskComponent implements OnChanges {
         }
     }
 
-    create(): void {
+    createNew(): void {
         let newTask: ITask = this.taskService.createNewTask(this.title, this.deadline);
-        //this.taskService.saveTask(newTask);
-        this.taskService.addTodo(newTask);
-        this.clear();
+        this.taskService.saveTask(newTask);
+        this.clearUi();
     }
 
     remove(): void {
@@ -54,7 +55,9 @@ export class EditTaskComponent implements OnChanges {
         this.task.title = this.title;
         this.task.deadline = this.deadline;
 
-        this.taskService.addTodo(this.task)
+        this.taskService.saveTask(this.task);
+/*
+            .addTodo(this.task)
             .subscribe(
                 res => {
                     console.log(res);
@@ -62,24 +65,24 @@ export class EditTaskComponent implements OnChanges {
                 err => {
                     console.log(err);
                 });
+*/
 
         //this.taskService.saveTask(this.task);
-        this.clear();
+        this.clearUi();
     }
 
     discardChanges(): void {
-        this.clear();
+        this.clearUi();
     }
 
-    clear(): void {
+    clearUi(): void {
         this.title = '';
         this.deadline = new Date();
-        this.task = this.taskService.createNewEmptyTask();
         this.isInEditMode = false;
     }
 
     initializeUi(title: string, deadline: string): void {
-        this.title = title;
-        this.deadline = deadline;
+        //this.title = title;
+        //this.deadline = deadline;
     }
 }

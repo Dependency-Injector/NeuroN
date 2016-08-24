@@ -104,20 +104,22 @@ System.register(['@angular/core', './task', '@angular/http', 'rxjs/Observable', 
                     return obs;
                 }
                 saveTask(task) {
+                    // New task - save by POST
                     if (task.id == null) {
                         this.http.post(this.localApiUrl, JSON.stringify(task), this.jsonHeaders)
-                            .map(responseData => {
-                            return responseData.json();
+                            .map((response) => {
+                            return response.json();
                         })
                             .catch(this.handleError)
-                            .subscribe(data => {
-                            this.tasks.push(data);
+                            .subscribe(task => {
+                            let createdTask = new task_1.Task(task.id, task.title, task.deadline, task.isFinished);
+                            this.tasks.push(createdTask);
                             this._todos.next(this.tasks);
                             //this.subject.next(this.tasks);
                         });
                     }
                     else {
-                        this.http.put(this.localApiUrl, JSON.stringify(task), this.jsonHeaders)
+                        this.http.put(this.localApiUrl + '/' + task.id, JSON.stringify(task), this.jsonHeaders)
                             .map(responseData => {
                             return responseData.json();
                         })

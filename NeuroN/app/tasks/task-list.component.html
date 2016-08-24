@@ -31,7 +31,7 @@
                 </thead>
             <tbody>
             <!--<tr *ngFor="#task of tasks | taskFilter:listFilter">-->
-            <tr *ngFor="#task of tasks">
+            <tr *ngFor="let task of tasks">
                 <!-- <td>
                     <img *ngIf="showImage"
                          [src]="task.imageUrl"

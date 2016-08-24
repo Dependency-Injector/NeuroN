@@ -17,6 +17,8 @@ export class TodoPageComponent {
     taskListTitle: string = 'Todo list';
     editedTaskId: number = null;
 
+    //editedTaskId: ITask = null;
+
     onTaskCreated($event) {
         console.log('Event sent to app: ');
         console.log($event);
@@ -27,6 +29,7 @@ export class TodoPageComponent {
     }
 
     onEditTask($event) {
+        //this.editedTaskId = $event;
         this.editedTaskId = $event;
     }
 
