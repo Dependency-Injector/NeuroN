@@ -1,0 +1,26 @@
+﻿<div class="panel panel-primary">
+    <div class="panel-heading">
+        {{pageTitle}}
+    </div>
+    <div class="panel-body">
+        <form (ngSubmit)="submitEntry()">
+            <div class="form-group">
+                <div class="input-group">
+                    <label for="entryTitle" class="col-sm-2 control-label">Title</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="entryTitle" placeholder="Post title" [(ngModel)]="model.title" name="title" />
+                    </div>
+                </div>
+
+                <br />
+
+                <textarea class="form-control" rows="3" placeholder="Text" [(ngModel)]="model.text" name="text"></textarea>
+
+                <br />
+
+                <button *ngIf="!editing" type="submit" class="btn btn-primary">Add</button>
+                <button *ngIf="editing" type="submit" class="btn btn-warning">Update</button>
+            </div>
+        </form>
+    </div>
+</div>

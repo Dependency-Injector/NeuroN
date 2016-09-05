@@ -37,9 +37,7 @@ namespace ApiNeuron.Controllers
 
             return new ObjectResult(task);
         }
-
-
-        // POST api/tasks
+        
         [HttpPost]
         public IActionResult Create([FromBody]Task task)
         {
@@ -47,10 +45,9 @@ namespace ApiNeuron.Controllers
                 return BadRequest();
 
             Task addedTask = taskRepository.Add(task);
-            return new ObjectResult(addedTask); //CreatedAtRoute("Get", new { id = addedTask.Id }, addedTask);
+            return new ObjectResult(addedTask);
         }
-
-        // PUT api/values/5
+        
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]Task task)
         {
@@ -61,15 +58,26 @@ namespace ApiNeuron.Controllers
             if (existingTask == null)
                 return NotFound();
 
-            taskRepository.Update(task);
-            return new NoContentResult();
+            Task updatedTask = taskRepository.Update(task);
+            return new ObjectResult(updatedTask);
         }
-
-        // DELETE api/values/5
+        
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
             taskRepository.Remove(id);
+        }
+        
+        [HttpPut("FinishTask/{id}")]
+        public IActionResult FinishTask(int id)
+        {
+            Task finishedTask = taskRepository.Get(id);
+            if (finishedTask == null)
+                return NotFound();
+
+            finishedTask.IsFinished = true;
+            taskRepository.Update(finishedTask);
+            return new ObjectResult(finishedTask);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ApiNeuron.Models;
-using Microsoft.EntityFrameworkCore;
 using Task = ApiNeuron.Models.Task;
 
 namespace ApiNeuron.Repositories
@@ -22,7 +21,7 @@ namespace ApiNeuron.Repositories
 
         public Task Get(int id)
         {
-            return context.Tasks.SingleOrDefault(t => t.Id == id);
+            return context.Tasks.FirstOrDefault(t => t.Id == id);
         }
 
         public Task Add(Task task)
@@ -34,15 +33,10 @@ namespace ApiNeuron.Repositories
 
         public Task Update(Task task)
         {
-            context.Tasks.Update(task);
+            var taskToUpdate = Get(task.Id.Value);
+            taskToUpdate.Deadline = task.Deadline;
+            taskToUpdate.Title = task.Title;
             context.SaveChanges();
-
-            //using (var ctx = new NeuronContext())
-            //{
-            //    context.Entry(task).State = EntityState.Modified;
-            //    context.SaveChanges();
-            //}
-
             return task;
         }
 

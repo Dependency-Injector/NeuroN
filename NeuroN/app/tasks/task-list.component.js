@@ -1,4 +1,4 @@
-System.register(['@angular/core', '@angular/router', './task-filter.pipe', '../shared/star.component', './task.service'], function(exports_1, context_1) {
+System.register(['@angular/core', './task.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,21 +10,12 @@ System.register(['@angular/core', '@angular/router', './task-filter.pipe', '../s
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, task_filter_pipe_1, star_component_1, task_service_1;
+    var core_1, task_service_1;
     var TaskListComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (router_1_1) {
-                router_1 = router_1_1;
-            },
-            function (task_filter_pipe_1_1) {
-                task_filter_pipe_1 = task_filter_pipe_1_1;
-            },
-            function (star_component_1_1) {
-                star_component_1 = star_component_1_1;
             },
             function (task_service_1_1) {
                 task_service_1 = task_service_1_1;
@@ -38,6 +29,7 @@ System.register(['@angular/core', '@angular/router', './task-filter.pipe', '../s
                     this.imageWidth = 40;
                     this.showImage = false;
                     this.listFilter = 'task';
+                    this.pageTitle = 'Todo';
                 }
                 toggleImage() {
                     this.showImage = !this.showImage;
@@ -56,28 +48,15 @@ System.register(['@angular/core', '@angular/router', './task-filter.pipe', '../s
                         this.tasks = tasks;
                         console.log('task list has new list');
                     });
-                    /*
-                            this.taskService.getTasks()
-                                .subscribe((tasks: ITask[]) => {
-                                    this.tasks = tasks;
-                                    console.log('tasks list updated in task-list');
-                                });
-                    */
                 }
                 ngOnChanges(changes) {
                     if (changes.tasks)
                         this.tasks = changes.tasks.currentValue;
-                    console.log('sth changed');
-                    console.log(changes);
                 }
                 onPriorityClicked(message) {
-                    this.pageTitle = "Product list " + message;
+                    //this.pageTitle = "Product list " + message;
                 }
             };
-            __decorate([
-                core_1.Input(), 
-                __metadata('design:type', String)
-            ], TaskListComponent.prototype, "pageTitle", void 0);
             __decorate([
                 core_1.Output(), 
                 __metadata('design:type', core_1.EventEmitter)
@@ -86,9 +65,7 @@ System.register(['@angular/core', '@angular/router', './task-filter.pipe', '../s
                 core_1.Component({
                     selector: 'nn-task-list',
                     templateUrl: 'app/tasks/task-list.component.html',
-                    styleUrls: ['app/tasks/task-list.component.css'],
-                    pipes: [task_filter_pipe_1.TaskFilterPipe],
-                    directives: [star_component_1.StarComponent, router_1.ROUTER_DIRECTIVES]
+                    styleUrls: ['app/tasks/task-list.component.css']
                 }), 
                 __metadata('design:paramtypes', [task_service_1.TaskService])
             ], TaskListComponent);

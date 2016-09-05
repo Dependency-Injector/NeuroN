@@ -1,4 +1,4 @@
-System.register(['@angular/core', './task.service', 'ng2-bootstrap/ng2-bootstrap'], function(exports_1, context_1) {
+System.register(['@angular/core', './task.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', './task.service', 'ng2-bootstrap/ng2-bootstrap
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, task_service_1, ng2_bootstrap_1, ng2_bootstrap_2;
+    var core_1, task_service_1;
     var EditTaskComponent;
     return {
         setters:[
@@ -19,16 +19,11 @@ System.register(['@angular/core', './task.service', 'ng2-bootstrap/ng2-bootstrap
             },
             function (task_service_1_1) {
                 task_service_1 = task_service_1_1;
-            },
-            function (ng2_bootstrap_1_1) {
-                ng2_bootstrap_1 = ng2_bootstrap_1_1;
-                ng2_bootstrap_2 = ng2_bootstrap_1_1;
             }],
         execute: function() {
             let EditTaskComponent = class EditTaskComponent {
                 constructor(taskService) {
                     this.taskService = taskService;
-                    this.taskCreated = new core_1.EventEmitter();
                     this.isInEditMode = false;
                 }
                 ngOnChanges(changes) {
@@ -53,22 +48,12 @@ System.register(['@angular/core', './task.service', 'ng2-bootstrap/ng2-bootstrap
                 }
                 remove() {
                     this.taskService.removeTask(this.task);
+                    this.clearUi();
                 }
                 saveChanges() {
                     this.task.title = this.title;
                     this.task.deadline = this.deadline;
                     this.taskService.saveTask(this.task);
-                    /*
-                                .addTodo(this.task)
-                                .subscribe(
-                                    res => {
-                                        console.log(res);
-                                    },
-                                    err => {
-                                        console.log(err);
-                                    });
-                    */
-                    //this.taskService.saveTask(this.task);
                     this.clearUi();
                 }
                 discardChanges() {
@@ -79,25 +64,16 @@ System.register(['@angular/core', './task.service', 'ng2-bootstrap/ng2-bootstrap
                     this.deadline = new Date();
                     this.isInEditMode = false;
                 }
-                initializeUi(title, deadline) {
-                    //this.title = title;
-                    //this.deadline = deadline;
-                }
             };
             __decorate([
                 core_1.Input(), 
                 __metadata('design:type', Number)
             ], EditTaskComponent.prototype, "taskId", void 0);
-            __decorate([
-                core_1.Output(), 
-                __metadata('design:type', core_1.EventEmitter)
-            ], EditTaskComponent.prototype, "taskCreated", void 0);
             EditTaskComponent = __decorate([
                 core_1.Component({
                     selector: 'nn-edit-task',
                     templateUrl: 'app/tasks/edit-task.component.html',
-                    styleUrls: ['app/tasks/edit-task.component.css'],
-                    directives: [ng2_bootstrap_1.AlertComponent, ng2_bootstrap_2.DATEPICKER_DIRECTIVES]
+                    styleUrls: ['app/tasks/edit-task.component.css']
                 }), 
                 __metadata('design:paramtypes', [task_service_1.TaskService])
             ], EditTaskComponent);

@@ -1,57 +1,70 @@
 ﻿import { Injectable } from '@angular/core';
-import { ITask, Task } from './task';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { IBlogEntry, BlogEntry } from './blog-entry';
+
+//import 'rxjs/add/'
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
+
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/Rx';
+//import { IBlogEntry, BlogEntry } from './blog-entry';
 import { ApiHelper } from './../utilities/apiHelper.service';
 
-import 'rxjs/add/operator/map';
+
 
 @Injectable()
 
-export class TaskService {
-    private azureTasksApiUrl = 'http://apineuro.azurewebsites.net/api/tasks';
-    private localApiUrl = 'http://localhost:2243/api/tasks';
+export class BlogService {
+    private azureTasksApiUrl = 'http://apineuro.azurewebsites.net/api/blog';
+    private localApiUrl = 'http://localhost:2243/api/blog';
 
-    private stream: BehaviorSubject<Array<ITask>>;
-    private tasks: Array<ITask> = [];
+    private stream: BehaviorSubject<Array<IBlogEntry>>;
+    private tasks: Array<IBlogEntry> = [];
+    
+    constructor(private http: Http) {
+        this.stream = new BehaviorSubject(new Array<IBlogEntry>());
+    }
 
-    get todos() {
+    getBlogEntries(): Observable<BlogEntry[]> {
+        return this.http.get(this.localApiUrl)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    removeEntry(id: number): Observable<BlogEntry[]> {
+        return this.http.delete(`${this.localApiUrl}/${id}`)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+
+    get entries() {
         return this.stream.asObservable();
     }
-    private xxx: number;
 
-    private jsonHeaders: RequestOptions;
-
-    constructor(private http: Http, private apiHelper: ApiHelper) {
-        this.tasks = [];
-        this.stream = new BehaviorSubject(new Array<ITask>());
-
-        this.jsonHeaders = new RequestOptions({ headers: apiHelper.getJsonHeaders() });
-        this.loadInitialData();
-    }
-
-    translateTask(task: any): Task {
+    /*translateTask(task: any): Task {
         return new Task(task.id, task.title, task.deadline, task.isFinished);
-    }
+    }*/
 
     loadInitialData() {
-        this.http.get(this.localApiUrl)
+        /*this.http.get(this.localApiUrl)
             .map((response: Response) => {
                 let resp = response.json();
-                let todos = resp.map(this.translateTask)
+                let todos = resp.map(this.translateTask);
                 //let todos = (<Object[]>response.json()).map((task: any) => new Task(task.id, task.title, task.deadline, task.isFinished));
                 return todos;
             })
             .catch(this.handleError)
             .subscribe(res => {
                 this.tasks = res;
-                this.stream.next(res)
-            }
-            );
+                    this.stream.next(res);
+                }
+            );*/
     }
 
+/*
     addTodo(newTodo: ITask): Observable<any> {
         let obs = this.http.post(this.localApiUrl, JSON.stringify(newTodo), this.jsonHeaders).share();
 
@@ -148,7 +161,7 @@ export class TaskService {
 
     getTask(id: number): ITask {
         return this.tasks.find(t => t.id == id);
-    }
+    }*/
     /*
     private obtainTasksFromApi(): void {
 
@@ -180,7 +193,7 @@ export class TaskService {
             });
     }
 */
-
+/*
     private handleError(error: any): any {
         // In a real world app, we might use a remote logging infrastructure
         // We'd also dig deeper into the error to get a better message
@@ -190,5 +203,5 @@ export class TaskService {
 
         //console.log(error);
         return Observable.throw(error.json().error || 'Server error');
-    }
+    }*/
 }

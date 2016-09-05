@@ -4,10 +4,12 @@ import { TodoPageComponent } from './tasks/todo-page.component';
 import { TaskDetailsComponent } from './tasks/task-details.component';
 import { AvatarComponent } from './avatar/avatar.component';
 
+import { BlogComponent } from './blog/blog.component';
+
 const appRoutes: Routes = [
     {
         path: '',
-        redirectTo: '/tasks',
+        redirectTo: '/blog',
         pathMatch: 'full'
     },
     {
@@ -17,6 +19,10 @@ const appRoutes: Routes = [
     {
         path: 'avatar',
         component: AvatarComponent
+    },
+    {
+        path: 'blog',
+        component: BlogComponent
     }/*,
     {
         path: 'task-details/:id',

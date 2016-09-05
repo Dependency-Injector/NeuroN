@@ -1,5 +1,4 @@
 ﻿import { Component } from '@angular/core';
-/*import { RouteParams, Router } from '@angular/router-deprecated';*/
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({

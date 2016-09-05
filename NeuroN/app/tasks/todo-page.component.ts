@@ -7,14 +7,12 @@ import { EditTaskComponent } from './edit-task.component';
 import { TaskService } from './task.service';
 
 @Component({
-    templateUrl: 'app/tasks/todo-page.component.html',
-    directives: [TaskListComponent, EditTaskComponent],
-    providers: [TaskService]
+    templateUrl: 'app/tasks/todo-page.component.html'
 })
 
 export class TodoPageComponent {
     pageTitle: string = 'Todo page';
-    taskListTitle: string = 'Todo list';
+    //taskListTitle: string = 'Todo list';
     editedTaskId: number = null;
 
     //editedTaskId: ITask = null;
@@ -25,7 +23,7 @@ export class TodoPageComponent {
         var newTasks: ITask[] = [$event];
 
         this.tasks = this.tasks.concat(newTasks);
-        this.taskListTitle = 'Todo list edited';
+        //this.taskListTitle = 'Todo list edited';
     }
 
     onEditTask($event) {

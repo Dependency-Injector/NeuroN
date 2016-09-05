@@ -70,11 +70,15 @@
   <ItemGroup>
     <Content Include="app\app.component.html" />
     <Content Include="app\avatar\avatar.component.html" />
+    <Content Include="app\blog\edit-blog-entry.component.html" />
     <Content Include="app\main.js" />
     <Content Include="app\shared\menu\menu-item.component.css" />
     <Content Include="app\shared\menu\menu-item.component.html" />
     <Content Include="app\shared\menu\menu.component.css" />
     <Content Include="app\shared\menu\menu.component.html" />
+    <Content Include="app\blog\blog-entry-list.component.css" />
+    <Content Include="app\blog\blog-entry-list.component.html" />
+    <Content Include="app\blog\blog.component.html" />
     <Content Include="app\tasks\task-details.component.html" />
     <Content Include="app\tasks\edit-task.component.html" />
     <Content Include="app\tasks\edit-task.component.css" />
@@ -85,7 +89,6 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="gulpfile.js" />
-    <Content Include="node_modules\angular2\core.js" />
     <Content Include="packages.config" />
     <Content Include="api\tasks\tasks.json" />
     <Content Include="app\home\welcome.component.js.map" />
@@ -124,12 +127,23 @@
     <TypeScriptCompile Include="app\app.component.ts" />
     <TypeScriptCompile Include="app\app.module.ts" />
     <TypeScriptCompile Include="app\app.routing.ts" />
+    <TypeScriptCompile Include="app\app.providers.ts" />
     <TypeScriptCompile Include="app\avatar\avatar.component.ts" />
+    <TypeScriptCompile Include="app\blog\edit-blog-entry.component.ts" />
     <TypeScriptCompile Include="app\home\welcome.component.ts" />
     <TypeScriptCompile Include="app\main.ts" />
+    <TypeScriptCompile Include="app\shared\interfaces.ts" />
     <TypeScriptCompile Include="app\shared\menu\menu-item.component.ts" />
     <TypeScriptCompile Include="app\shared\menu\menu.component.ts" />
+    <TypeScriptCompile Include="app\shared\utilities\emitter.service.ts" />
+    <TypeScriptCompile Include="app\shared\utilities\config.service.ts" />
+    <TypeScriptCompile Include="app\shared\services\blog.service.ts" />
     <TypeScriptCompile Include="app\shared\star.component.ts" />
+    <TypeScriptCompile Include="app\shared\utilities\items.service.ts" />
+    <TypeScriptCompile Include="app\blog\blog-entry-list.component.ts" />
+    <TypeScriptCompile Include="app\blog\blog.service.ts" />
+    <TypeScriptCompile Include="app\blog\blog-entry.ts" />
+    <TypeScriptCompile Include="app\blog\blog.component.ts" />
     <TypeScriptCompile Include="app\tasks\edit-task.component.ts" />
     <TypeScriptCompile Include="app\tasks\task-details.component.ts" />
     <TypeScriptCompile Include="app\tasks\task-filter.pipe.ts" />
@@ -139,6 +153,7 @@
     <TypeScriptCompile Include="app\tasks\todo-page.component.ts" />
     <TypeScriptCompile Include="app\utilities\apiHelper.service.ts" />
     <TypeScriptCompile Include="app\utilities\asObservable.ts" />
+    <TypeScriptCompile Include="app\rxjs-operators.ts" />
     <TypeScriptCompile Include="typings\browser\ambient\es6-shim\index.d.ts" />
   </ItemGroup>
   <ItemGroup>

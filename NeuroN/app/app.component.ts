@@ -1,23 +1,24 @@
 ﻿import { Component } from '@angular/core';
-import { HTTP_PROVIDERS } from '@angular/http';
 import { Router } from '@angular/router';
 //import { ROUTER_PROVIDERS, RouteConfig, ROUTER_DIRECTIVES, Router } from '@angular/router-deprecated';
-import 'rxjs/Rx';   
+import 'rxjs/Rx';
+import './rxjs-operators';
 
 import { ITask, Task } from './tasks/task';
 import { AvatarComponent } from './avatar/avatar.component';
 import { TodoPageComponent } from './tasks/todo-page.component';
 import { TaskDetailsComponent } from './tasks/task-details.component';
-import { MenuComponent } from './shared/menu/menu.component';
-import { MenuItemComponent } from './shared/menu/menu-item.component';
+import { BlogComponent } from './blog/blog.component';
+
+import { APP_PROVIDERS } from './app.providers';
 
 import { ApiHelper } from './utilities/apiHelper.service';
 
 @Component({
     selector: 'nn-app',
-    templateUrl: 'app/app.component.html',
-    directives: [MenuComponent, MenuItemComponent],
-    providers: [HTTP_PROVIDERS, ApiHelper]
+    templateUrl: 'app/app.component.html'//,
+    //directives: [MenuComponent, MenuItemComponent],
+    //providers: [ApiHelper, APP_PROVIDERS]
 })
 
 /*@RouteConfig([

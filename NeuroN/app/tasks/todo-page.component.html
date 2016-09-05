@@ -1,8 +1,8 @@
-﻿<div class="row">
+﻿<div class="row" style="margin-top: 30px;">
     <div class="col-md-6">
-        <nn-edit-task (taskCreated)="onTaskCreated($event)" [(taskId)]="editedTaskId"></nn-edit-task>
+        <nn-edit-task [(taskId)]="editedTaskId"></nn-edit-task>
     </div>
     <div class="col-md-6">
-        <nn-task-list [pageTitle]="taskListTitle" (editTaskClicked)="onEditTask($event)"></nn-task-list>
+        <nn-task-list (editTaskClicked)="onEditTask($event)"></nn-task-list>
     </div>
 </div>

@@ -1,4 +1,4 @@
-System.register(['@angular/core', './task', '@angular/http', 'rxjs/Observable', 'rxjs/Rx', './../utilities/apiHelper.service'], function(exports_1, context_1) {
+System.register(['@angular/core', './task', '@angular/http', 'rxjs/Observable', 'rxjs/Rx', './../utilities/apiHelper.service', 'rxjs/add/operator/map'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -31,7 +31,8 @@ System.register(['@angular/core', './task', '@angular/http', 'rxjs/Observable', 
             },
             function (apiHelper_service_1_1) {
                 apiHelper_service_1 = apiHelper_service_1_1;
-            }],
+            },
+            function (_1) {}],
         execute: function() {
             let TaskService = class TaskService {
                 constructor(http, apiHelper) {
@@ -41,19 +42,17 @@ System.register(['@angular/core', './task', '@angular/http', 'rxjs/Observable', 
                     this.localApiUrl = 'http://localhost:2243/api/tasks';
                     this.tasks = [];
                     this.tasks = [];
-                    this._todos = new Rx_1.BehaviorSubject(new Array());
+                    this.stream = new Rx_1.BehaviorSubject(new Array());
                     this.jsonHeaders = new http_1.RequestOptions({ headers: apiHelper.getJsonHeaders() });
                     this.loadInitialData();
                 }
                 get todos() {
-                    return this._todos.asObservable();
+                    return this.stream.asObservable();
                 }
                 translateTask(task) {
                     return new task_1.Task(task.id, task.title, task.deadline, task.isFinished);
                 }
                 loadInitialData() {
-                    console.log('loadInitialData');
-                    //ttt
                     this.http.get(this.localApiUrl)
                         .map((response) => {
                         let resp = response.json();
@@ -64,7 +63,7 @@ System.register(['@angular/core', './task', '@angular/http', 'rxjs/Observable', 
                         .catch(this.handleError)
                         .subscribe(res => {
                         this.tasks = res;
-                        this._todos.next(res);
+                        this.stream.next(res);
                     });
                 }
                 addTodo(newTodo) {
@@ -72,9 +71,9 @@ System.register(['@angular/core', './task', '@angular/http', 'rxjs/Observable', 
                     obs.subscribe(res => {
                         let t = res.json();
                         let taskObject = new task_1.Task(t.id, t.title, t.deadline, t.isFinished);
-                        var temp = this._todos.getValue();
+                        var temp = this.stream.getValue();
                         temp.push(taskObject);
-                        this._todos.next(temp);
+                        this.stream.next(temp);
                     });
                     return obs;
                 }
@@ -89,18 +88,17 @@ System.register(['@angular/core', './task', '@angular/http', 'rxjs/Observable', 
                     return this.createNewTask('', new Date().toDateString());
                 }
                 removeTask(task) {
-                    let obs = this.http.delete(this.localApiUrl + "/" + task.id, this.jsonHeaders).share();
-                    obs.subscribe(res => {
-                        /*let t = res.json();
-                        let taskObject = new Task(t.id, t.title, t.deadline, t.isFinished);
-        */
-                        var temp = this._todos.getValue();
-                        var index = temp.findIndex((tt) => tt.id === task.id, 0);
+                    let obs = this.http.delete(this.localApiUrl + "/" + task.id);
+                    obs.subscribe((res) => {
+                        var index = this.tasks.findIndex((tt) => tt.id === task.id, 0);
                         if (index > -1) {
-                            temp.splice(index, 1);
-                            this._todos.next(temp);
+                            this.tasks.splice(index, 1);
+                            this.stream.next(this.tasks);
                         }
-                    }, err => console.log('ellol. xd'));
+                    }, err => {
+                        console.log('error when removing task');
+                        console.log(err);
+                    });
                     return obs;
                 }
                 saveTask(task) {
@@ -114,8 +112,7 @@ System.register(['@angular/core', './task', '@angular/http', 'rxjs/Observable', 
                             .subscribe(task => {
                             let createdTask = new task_1.Task(task.id, task.title, task.deadline, task.isFinished);
                             this.tasks.push(createdTask);
-                            this._todos.next(this.tasks);
-                            //this.subject.next(this.tasks);
+                            this.stream.next(this.tasks);
                         });
                     }
                     else {
@@ -123,51 +120,61 @@ System.register(['@angular/core', './task', '@angular/http', 'rxjs/Observable', 
                             .map(responseData => {
                             return responseData.json();
                         })
-                            .catch(this.handleError)
                             .subscribe(data => {
                             let updatedTaskIndex = this.tasks.findIndex(t => t.id == data.id);
-                            if (updatedTaskIndex) {
+                            if (updatedTaskIndex != null) {
                                 this.tasks[updatedTaskIndex] = data;
-                                this._todos.next(this.tasks);
+                                this.stream.next(this.tasks);
                             }
                         });
                     }
                 }
                 finishTask(taskId) {
-                    this.http.get(this.localApiUrl + '/FinishTask');
+                    this.http.put(`${this.localApiUrl}/FinishTask/${taskId}`, { headers: this.jsonHeaders.headers })
+                        .map(response => {
+                        return response.json();
+                    }).subscribe(data => {
+                        let finishedTaskIndex = this.tasks.findIndex(t => t.id == data.id);
+                        if (finishedTaskIndex != null) {
+                            this.tasks[finishedTaskIndex] = data;
+                            this.stream.next(this.tasks);
+                        }
+                    });
                 }
-                /*getTasks(): Observable<Task[]> {
-                    return this.subject.asObservable();
-                }*/
                 getTask(id) {
                     return this.tasks.find(t => t.id == id);
                 }
-                obtainTasksFromApi() {
+                /*
+                private obtainTasksFromApi(): void {
+            
                     console.log('obtainTasksFromApi');
-                    let headers = new http_1.Headers({
+            
+                    let headers = new Headers({
                         'Content-Type': 'application/json'
                     });
+            
                     // Obtains tasks from json file
                     // Maps them to array of Task
                     // Subscribes to itself (change this in future) and save obtained tasks
                     // Notify about task collection change
                     this.http.get(this.azureTasksApiUrl)
                         .map((responseData) => {
-                        return responseData.json();
-                    })
-                        .map((tasks) => {
-                        let result = [];
-                        if (tasks) {
-                            tasks.forEach((task) => {
-                                result.push(new task_1.Task(task.id, task.title, task.deadline, task.isFinished));
-                            });
-                            return result;
-                        }
-                    }).subscribe(res => {
-                        //this.tasks = res;
-                        //this.subject.next(this.tasks);
-                    });
+                            return responseData.json();
+                        })
+                        .map((tasks: Array<any>) => {
+                            let result: Array<ITask> = [];
+                            if (tasks) {
+                                tasks.forEach((task) => {
+                                    result.push(new Task(task.id, task.title, task.deadline, task.isFinished));
+                                });
+                                return result;
+                            }
+                        }).subscribe(res => {
+                            //this.tasks = res;
+                            //this.subject.next(this.tasks);
+                        });
                 }
+            */
                 handleError(error) {
                     // In a real world app, we might use a remote logging infrastructure
                     // We'd also dig deeper into the error to get a better message
