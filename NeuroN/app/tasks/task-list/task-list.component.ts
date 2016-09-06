@@ -1,13 +1,13 @@
 ﻿import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
-import { ITask } from './task';
-import { TaskFilterPipe } from './task-filter.pipe';
-import { StarComponent } from '../shared/star.component';
-import { TaskService } from './task.service';
+import { ITask } from './../shared/task';
+import { TaskFilterPipe } from './../shared/task-filter.pipe';
+import { StarComponent } from '../../shared/star.component';
+import { TaskService } from './../shared/task.service';
 
 @Component({
     selector: 'nn-task-list',
-    templateUrl: 'app/tasks/task-list.component.html',
-    styleUrls: ['app/tasks/task-list.component.css']
+    templateUrl: 'app/tasks/task-list/task-list.component.html',
+    styleUrls: ['app/tasks/task-list/task-list.component.css']
 })
 
 export class TaskListComponent implements OnInit, OnChanges {

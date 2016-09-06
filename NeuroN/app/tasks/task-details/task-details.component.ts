@@ -2,7 +2,7 @@
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
-    templateUrl: 'app/tasks/task-details.component.html'
+    templateUrl: 'app/tasks/task-details/task-details.component.html'
 })
 
 export class TaskDetailsComponent {

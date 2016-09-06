@@ -9,6 +9,6 @@ namespace ApiNeuron.Models
         }
 
         public DbSet<Task> Tasks { get; set; }
-        
+        public DbSet<Post> Posts { get; set; }
     }
 }

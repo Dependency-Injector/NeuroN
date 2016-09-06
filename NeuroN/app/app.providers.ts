@@ -11,7 +11,7 @@ export const APP_PROVIDERS = [
     ItemsService,
     ConfigService,
 
-    BlogService
+    //BlogService
     //FORM_PROVIDERS
     /*ConfigService,
     DataService,

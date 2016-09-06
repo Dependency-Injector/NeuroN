@@ -9,15 +9,15 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './shared/menu/menu.component';
 import { MenuItemComponent } from './shared/menu/menu-item.component';
 import { TodoPageComponent } from './tasks/todo-page.component';
-import { EditTaskComponent } from './tasks/edit-task.component';
-import { TaskListComponent } from './tasks/task-list.component';
+import { EditTaskComponent } from './tasks/edit-task/edit-task.component';
+import { TaskListComponent } from './tasks/task-list/task-list.component';
 import { BlogComponent } from './blog/blog.component';
-import { BlogEntryListComponent } from './blog/blog-entry-list.component';
-import { EditBlogEntryComponent } from './blog/edit-blog-entry.component';
+import { BlogEntryListComponent } from './blog/blog-entry-list/blog-entry-list.component';
+import { EditBlogEntryComponent } from './blog/edit-blog-entry/edit-blog-entry.component';
 import { AvatarComponent } from './avatar/avatar.component';
 
-import { TaskService } from './tasks/task.service';
-import { BlogService } from './blog/blog.service';
+import { TaskService } from './tasks/shared/task.service';
+import { BlogService } from './blog/shared/blog.service';
 import { ApiHelper } from './utilities/apiHelper.service';
 
 @NgModule({

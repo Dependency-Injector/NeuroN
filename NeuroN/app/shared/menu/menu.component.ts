@@ -8,8 +8,7 @@ import { MenuItemComponent } from './menu-item.component';
     styleUrls: ['app/shared/menu/menu.component.css'],
     host: {
         'class': 'nn-menu-area'
-    },
-    directives: [MenuItemComponent]
+    }
 })
 
 export class MenuComponent {

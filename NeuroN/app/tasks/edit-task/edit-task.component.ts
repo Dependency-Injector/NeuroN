@@ -1,12 +1,12 @@
 ﻿import { Component, Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { AlertComponent } from 'ng2-bootstrap/ng2-bootstrap';
-import { ITask, Task } from './task';
-import { TaskService } from './task.service';
+import { ITask, Task } from './../shared/task';
+import { TaskService } from './../shared/task.service';
 
 @Component({
     selector: 'nn-edit-task',
-    templateUrl: 'app/tasks/edit-task.component.html',
-    styleUrls: ['app/tasks/edit-task.component.css']
+    templateUrl: 'app/tasks/edit-task/edit-task.component.html',
+    styleUrls: ['app/tasks/edit-task/edit-task.component.css']
 })
 
 export class EditTaskComponent implements OnChanges {

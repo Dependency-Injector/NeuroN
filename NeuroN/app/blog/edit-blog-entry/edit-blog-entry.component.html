@@ -3,7 +3,7 @@
         {{pageTitle}}
     </div>
     <div class="panel-body">
-        <form (ngSubmit)="submitEntry()">
+        <form (ngSubmit)="submitPost()">
             <div class="form-group">
                 <div class="input-group">
                     <label for="entryTitle" class="col-sm-2 control-label">Title</label>
@@ -14,12 +14,13 @@
 
                 <br />
 
-                <textarea class="form-control" rows="3" placeholder="Text" [(ngModel)]="model.text" name="text"></textarea>
+                <textarea class="form-control" rows="3" placeholder="Text" [(ngModel)]="model.content" name="text"></textarea>
 
                 <br />
 
                 <button *ngIf="!editing" type="submit" class="btn btn-primary">Add</button>
-                <button *ngIf="editing" type="submit" class="btn btn-warning">Update</button>
+                <button *ngIf="editing" type="submit" class="btn btn-primary">Update</button>
+                <button *ngIf="editing" (click)="discardChanges()" class="btn btn-primary">Cancel</button>
             </div>
         </form>
     </div>

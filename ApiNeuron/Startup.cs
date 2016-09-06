@@ -38,9 +38,9 @@ namespace ApiNeuron
 
             // Add framework services.
             services.AddMvc();
-
-            //services.AddSingleton<ITaskRepository, TaskRepository>();
+            
             services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<IRepository<Post>, PostRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
