@@ -1,21 +1,41 @@
-﻿import { Component } from 'angular2/core';
+﻿import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+//import { ROUTER_PROVIDERS, RouteConfig, ROUTER_DIRECTIVES, Router } from '@angular/router-deprecated';
+import 'rxjs/Rx';
+import './rxjs-operators';
+
 import { ITask, Task } from './tasks/task';
-import { TaskListComponent } from './tasks/task-list.component';
-import { EditTaskComponent } from './tasks/edit-task.component';
-import { TaskService } from './tasks/task.service';
+import { AvatarComponent } from './avatar/avatar.component';
+import { TodoPageComponent } from './tasks/todo-page.component';
+import { TaskDetailsComponent } from './tasks/task-details.component';
+import { BlogComponent } from './blog/blog.component';
+
+import { APP_PROVIDERS } from './app.providers';
+
+import { ApiHelper } from './utilities/apiHelper.service';
 
 @Component({
-    selector: 'ne-app',
-    templateUrl: 'app/app.component.html',
-    directives: [TaskListComponent, EditTaskComponent],
-    providers: [TaskService]
+    selector: 'nn-app',
+    templateUrl: 'app/app.component.html'//,
+    //directives: [MenuComponent, MenuItemComponent],
+    //providers: [ApiHelper, APP_PROVIDERS]
 })
 
+/*@RouteConfig([
+    { path: '/tasks', name: 'Tasks', component: TodoPageComponent, useAsDefault: true },
+    { path: '/avatar', name: 'Avatar', component: AvatarComponent},
+    { path: '/task-details/:id', name: 'TaskDetails', component: TaskDetailsComponent}
+])*/
+
+
+
 export class AppComponent {
-    pageTitle: string = 'Acme product management';
+    constructor(private router: Router) { }
+
+    pageTitle: string = 'NeuroN FrameworK';
     taskListTitle: string = 'Todo list';
 
-    onTaskAdded($event) {
+    /*onTaskAdded($event) {
         console.log('Event sent to app: ');
         console.log($event);
         var newTasks: ITask[] = [$event];
@@ -24,28 +44,10 @@ export class AppComponent {
         this.taskListTitle = 'Todo list edited';
     }
 
-    tasks: ITask[] = [
-        {
-            id: 0,
-            title: 'task 1',
-            priority: 3,
-            finished: false,
-            deadline: 'today',
-            imageUrl: 'https://images.duckduckgo.com/iu/?u=http%3A%2F%2Ffreeflaticons.net%2Fwp-content%2Fuploads%2F2014%2F10%2Ftask-copy-1412926696kng48.png&f=1'
-        }, {
-            id: 1,
-            title: 'task 2',
-            priority: 1,
-            finished: true,
-            deadline: 'yesterday',
-            imageUrl: 'https://images.duckduckgo.com/iu/?u=http%3A%2F%2Ffreeflaticons.net%2Fwp-content%2Fuploads%2F2014%2F10%2Ftask-copy-1412926696kng48.png&f=1'
-        }, {
-            id: 2,
-            title: 'task 3',
-            priority: 2,
-            finished: false,
-            deadline: 'today',
-            imageUrl: 'https://images.duckduckgo.com/iu/?u=http%3A%2F%2Ffreeflaticons.net%2Fwp-content%2Fuploads%2F2014%2F10%2Ftask-copy-1412926696kng48.png&f=1'
-        }
-    ];
+    tasks: ITask[] = [];*/
+
+    onRouteSelected(route: string): void {
+        console.log(route);
+        this.router.navigate([route]);
+    }
 }

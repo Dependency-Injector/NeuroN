@@ -5,3 +5,22 @@ li {
 div.panel-heading {
    font-size: x-large; 
 }
+
+#wrapper {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    width: 250px;
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #000;
+}
+
+#sidebar-wrapper h4 {
+    color: #ccc;
+}

@@ -1,8 +1,19 @@
-﻿<div>
+﻿<div id="wrapper">
+    <div id="sidebar-wrapper">
+        <h4>
+            NeuroN Framework
+        </h4>
 
-    <h1>{{pageTitle}}</h1>
+        <nn-menu>
+            <nn-menu-item label="What's new" icon="fa-tachometer" route="blog" (menuItemSelected)="onRouteSelected($event)"></nn-menu-item>
+            <nn-menu-item label="Todo" icon="fa-check" route="tasks" (menuItemSelected)="onRouteSelected($event)"></nn-menu-item>
+            <nn-menu-item label="Avatar" icon="fa-user" route="avatar" (menuItemSelected)="onRouteSelected($event)"></nn-menu-item>
+        </nn-menu>
+    </div>
 
-    <nn-task-list [(tasks)]="tasks" [pageTitle]="taskListTitle"></nn-task-list>
+    <div class="container-fluid">
+        <router-outlet></router-outlet>
+    </div>
+</div>
 
-    <nn-edit-task (taskAdded)="onTaskAdded($event)"></nn-edit-task>
-</div>'
+

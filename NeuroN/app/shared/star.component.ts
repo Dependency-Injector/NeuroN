@@ -1,5 +1,5 @@
 ﻿import { Component, OnChanges, Input,
-    Output, EventEmitter } from 'angular2/core';
+    Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'nn-star', // neuron-star

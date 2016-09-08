@@ -1,0 +1,31 @@
+﻿<div class="panel panel-primary">
+    <div class="panel-heading">
+        {{isInEditMode ? 'Edit' : 'Create'}} task
+    </div>
+    <div class="panel-body">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label for="taskTitle" class="col-sm-2 control-label">Title</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="taskTitle" placeholder="Name your task" [(ngModel)]="title" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="taskDeadline" class="col-sm-2 control-label">Deadline</label>
+                <div class="col-sm-10">
+                    <datepicker id="taskDeadline" [(ngModel)]="deadline"></datepicker>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="pull-right">
+                        <button class="btn btn-primary" (click)="createNew()" *ngIf="!isInEditMode">Create</button>
+                        <button class="btn btn-error" (click)="remove()" *ngIf="isInEditMode">Remove</button>
+                        <button class="btn btn-default" (click)="discardChanges()" *ngIf="isInEditMode">Cancel</button>
+                        <button class="btn btn-primary" (click)="saveChanges()" *ngIf="isInEditMode">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
