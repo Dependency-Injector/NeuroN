@@ -35,10 +35,11 @@ System.register(['@angular/core', './shared/avatar.service'], function(exports_1
                 core_1.Component({
                     templateUrl: 'app/avatar/avatar.component.html'
                 }), 
-                __metadata('design:paramtypes', [avatar_service_1.AvatarService])
+                __metadata('design:paramtypes', [(typeof (_a = typeof avatar_service_1.AvatarService !== 'undefined' && avatar_service_1.AvatarService) === 'function' && _a) || Object])
             ], AvatarComponent);
             exports_1("AvatarComponent", AvatarComponent);
         }
     }
+    var _a;
 });
 //# sourceMappingURL=avatar.component.js.map

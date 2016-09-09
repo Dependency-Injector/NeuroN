@@ -41,6 +41,7 @@ namespace ApiNeuron
             
             services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<IRepository<Post>, PostRepository>();
+            services.AddScoped<IRepository<Avatar>, AvatarRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

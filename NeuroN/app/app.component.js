@@ -1,4 +1,4 @@
-System.register(['@angular/core', '@angular/router', 'rxjs/Rx', './rxjs-operators'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/router'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -19,9 +19,7 @@ System.register(['@angular/core', '@angular/router', 'rxjs/Rx', './rxjs-operator
             },
             function (router_1_1) {
                 router_1 = router_1_1;
-            },
-            function (_1) {},
-            function (_2) {}],
+            }],
         execute: function() {
             let AppComponent = class AppComponent {
                 constructor(router) {
@@ -29,16 +27,6 @@ System.register(['@angular/core', '@angular/router', 'rxjs/Rx', './rxjs-operator
                     this.pageTitle = 'NeuroN FrameworK';
                     this.taskListTitle = 'Todo list';
                 }
-                /*onTaskAdded($event) {
-                    console.log('Event sent to app: ');
-                    console.log($event);
-                    var newTasks: ITask[] = [$event];
-            
-                    this.tasks = this.tasks.concat(newTasks);
-                    this.taskListTitle = 'Todo list edited';
-                }
-            
-                tasks: ITask[] = [];*/
                 onRouteSelected(route) {
                     console.log(route);
                     this.router.navigate([route]);
@@ -47,7 +35,7 @@ System.register(['@angular/core', '@angular/router', 'rxjs/Rx', './rxjs-operator
             AppComponent = __decorate([
                 core_1.Component({
                     selector: 'nn-app',
-                    templateUrl: 'app/app.component.html' //,
+                    templateUrl: 'app/app.component.html'
                 }), 
                 __metadata('design:paramtypes', [router_1.Router])
             ], AppComponent);

@@ -24,32 +24,32 @@ namespace ApiNeuron.Repositories
             return context.Posts.FirstOrDefault(p => p.Id == id);
         }
 
-        public Post Add(Post post)
+        public Post Add(Post avatar)
         {
-            context.Posts.Add(post);
+            context.Posts.Add(avatar);
             context.SaveChanges();
-            return post;
+            return avatar;
         }
 
-        public Post Update(Post post)
+        public Post Update(Post avatar)
         {
-            var postToUpdate = Get(post.Id);
-            postToUpdate.Title = post.Title;
-            postToUpdate.Content = post.Content;
-            postToUpdate.Created = DateTime.Now;
+            var avatarToUpdate = Get(avatar.Id);
+            avatarToUpdate.Title = avatar.Title;
+            avatarToUpdate.Content = avatar.Content;
+            avatarToUpdate.Created = DateTime.Now;
             context.SaveChanges();
-            return post;
+            return avatar;
         }
 
         public Post Remove(int id)
         {
-            Post postToRemove = Get(id);
-            if (postToRemove != null)
+            Post avatarToRemove = Get(id);
+            if (avatarToRemove != null)
             {
-                context.Posts.Remove(postToRemove);
+                context.Posts.Remove(avatarToRemove);
                 context.SaveChanges();
             }
-            return postToRemove;
+            return avatarToRemove;
         }
     }
 }

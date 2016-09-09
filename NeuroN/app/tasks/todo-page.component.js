@@ -22,9 +22,20 @@ System.register(['@angular/core', 'rxjs/Rx'], function(exports_1, context_1) {
             let TodoPageComponent = class TodoPageComponent {
                 constructor() {
                     this.pageTitle = 'Todo page';
+                    //taskListTitle: string = 'Todo list';
                     this.editedTaskId = null;
+                    this.tasks = [];
+                }
+                //editedTaskId: ITask = null;
+                onTaskCreated($event) {
+                    console.log('Event sent to app: ');
+                    console.log($event);
+                    var newTasks = [$event];
+                    this.tasks = this.tasks.concat(newTasks);
+                    //this.taskListTitle = 'Todo list edited';
                 }
                 onEditTask($event) {
+                    //this.editedTaskId = $event;
                     this.editedTaskId = $event;
                 }
             };
