@@ -11,43 +11,37 @@ System.register(['angular2/core'], function(exports_1, context_1) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1;
-    var StarComponent;
+    var MenuComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            let StarComponent = class StarComponent {
-                constructor() {
-                    this.priorityClicked = new core_1.EventEmitter();
-                }
+            let MenuComponent = class MenuComponent {
+                //starWidth: number;
+                //@Output() priorityClicked: EventEmitter<string> = new EventEmitter<string>();
                 ngOnChanges() {
-                    this.starWidth = this.priority * 86 / 5;
+                    //this.starWidth = this.priority * 86 / 5;
                 }
                 onClick() {
-                    this.priorityClicked.emit('The priority ' + this.priority + ' clicked');
+                    //this.priorityClicked.emit('The priority ' + this.priority + ' clicked');
                 }
             };
             __decorate([
                 core_1.Input(), 
                 __metadata('design:type', Number)
-            ], StarComponent.prototype, "priority", void 0);
-            __decorate([
-                core_1.Output(), 
-                __metadata('design:type', (typeof (_a = typeof core_1.EventEmitter !== 'undefined' && core_1.EventEmitter) === 'function' && _a) || Object)
-            ], StarComponent.prototype, "priorityClicked", void 0);
-            StarComponent = __decorate([
+            ], MenuComponent.prototype, "priority", void 0);
+            MenuComponent = __decorate([
                 core_1.Component({
-                    selector: 'nn-star',
-                    templateUrl: 'app/shared/star.component.html',
-                    styleUrls: ['app/shared/star.component.css']
+                    selector: 'nn-menu',
+                    templateUrl: 'app/shared/menu/menu.component.html',
+                    styleUrls: ['app/shared/menu/menu.component.css']
                 }), 
                 __metadata('design:paramtypes', [])
-            ], StarComponent);
-            exports_1("StarComponent", StarComponent);
+            ], MenuComponent);
+            exports_1("MenuComponent", MenuComponent);
         }
     }
-    var _a;
 });
-//# sourceMappingURL=star.component.js.map
+//# sourceMappingURL=menu.component - Copy.js.map

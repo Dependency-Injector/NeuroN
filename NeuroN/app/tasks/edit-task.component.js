@@ -44,7 +44,7 @@ System.register(['angular2/core', './task'], function(exports_1, context_1) {
             };
             __decorate([
                 core_1.Output(), 
-                __metadata('design:type', core_1.EventEmitter)
+                __metadata('design:type', (typeof (_a = typeof core_1.EventEmitter !== 'undefined' && core_1.EventEmitter) === 'function' && _a) || Object)
             ], EditTaskComponent.prototype, "taskAdded", void 0);
             EditTaskComponent = __decorate([
                 core_1.Component({
@@ -57,5 +57,6 @@ System.register(['angular2/core', './task'], function(exports_1, context_1) {
             exports_1("EditTaskComponent", EditTaskComponent);
         }
     }
+    var _a;
 });
 //# sourceMappingURL=edit-task.component.js.map

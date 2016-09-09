@@ -35,7 +35,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
             ], StarComponent.prototype, "priority", void 0);
             __decorate([
                 core_1.Output(), 
-                __metadata('design:type', (typeof (_a = typeof core_1.EventEmitter !== 'undefined' && core_1.EventEmitter) === 'function' && _a) || Object)
+                __metadata('design:type', core_1.EventEmitter)
             ], StarComponent.prototype, "priorityClicked", void 0);
             StarComponent = __decorate([
                 core_1.Component({
@@ -48,6 +48,5 @@ System.register(['angular2/core'], function(exports_1, context_1) {
             exports_1("StarComponent", StarComponent);
         }
     }
-    var _a;
 });
 //# sourceMappingURL=star.component.js.map

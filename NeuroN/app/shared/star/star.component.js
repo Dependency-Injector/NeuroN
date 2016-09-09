@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['@angular/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -35,19 +35,18 @@ System.register(['angular2/core'], function(exports_1, context_1) {
             ], StarComponent.prototype, "priority", void 0);
             __decorate([
                 core_1.Output(), 
-                __metadata('design:type', (typeof (_a = typeof core_1.EventEmitter !== 'undefined' && core_1.EventEmitter) === 'function' && _a) || Object)
+                __metadata('design:type', core_1.EventEmitter)
             ], StarComponent.prototype, "priorityClicked", void 0);
             StarComponent = __decorate([
                 core_1.Component({
                     selector: 'nn-star',
-                    templateUrl: 'app/shared/star.component.html',
-                    styleUrls: ['app/shared/star.component.css']
+                    templateUrl: 'app/shared/star/star.component.html',
+                    styleUrls: ['app/shared/star/star.component.css']
                 }), 
                 __metadata('design:paramtypes', [])
             ], StarComponent);
             exports_1("StarComponent", StarComponent);
         }
     }
-    var _a;
 });
 //# sourceMappingURL=star.component.js.map
