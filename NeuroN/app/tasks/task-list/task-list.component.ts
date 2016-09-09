@@ -1,7 +1,7 @@
 ﻿import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
 import { ITask } from './../shared/task';
 import { TaskFilterPipe } from './../shared/task-filter.pipe';
-import { StarComponent } from '../../shared/star.component';
+import { StarComponent } from '../../shared/star/star.component';
 import { TaskService } from './../shared/task.service';
 
 @Component({

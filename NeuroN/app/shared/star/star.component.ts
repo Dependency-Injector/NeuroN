@@ -3,8 +3,8 @@
 
 @Component({
     selector: 'nn-star', // neuron-star
-    templateUrl: 'app/shared/star.component.html',
-    styleUrls: ['app/shared/star.component.css']
+    templateUrl: 'app/shared/star/star.component.html',
+    styleUrls: ['app/shared/star/star.component.css']
 })
 
 export class StarComponent implements OnChanges {

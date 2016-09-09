@@ -18,6 +18,7 @@ import { AvatarComponent } from './avatar/avatar.component';
 
 import { TaskService } from './tasks/shared/task.service';
 import { BlogService } from './blog/shared/blog.service';
+import { AvatarService } from './avatar/shared/avatar.service';
 import { ApiHelper } from './utilities/apiHelper.service';
 
 @NgModule({
@@ -56,6 +57,7 @@ import { ApiHelper } from './utilities/apiHelper.service';
     providers: [
         TaskService,
         BlogService,
+        AvatarService,
 
         ApiHelper
     ],
