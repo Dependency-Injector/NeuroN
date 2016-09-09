@@ -68,22 +68,41 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\app.component.js" />
     <Content Include="app\app.component.html" />
+    <Content Include="app\avatar\avatar.component.html" />
+    <Content Include="app\blog\edit-blog-entry\edit-blog-entry.component.html" />
     <Content Include="app\main.js" />
-    <Content Include="app\tasks\edit-task.component.html" />
-    <Content Include="app\tasks\edit-task.component.css" />
-    <Content Include="app\tasks\task-list.component.css" />
-    <Content Include="app\tasks\task-list.component.html" />
-    <Content Include="node_modules\angular2\core.js" />
+    <Content Include="app\shared\menu\menu-item.component.css" />
+    <Content Include="app\shared\menu\menu-item.component.html" />
+    <Content Include="app\shared\menu\menu.component.css" />
+    <Content Include="app\shared\menu\menu.component.html" />
+    <Content Include="app\blog\blog-entry-list\blog-entry-list.component.css" />
+    <Content Include="app\blog\blog-entry-list\blog-entry-list.component.html" />
+    <Content Include="app\blog\blog.component.html" />
+    <Content Include="app\tasks\task-details\task-details.component.html" />
+    <Content Include="app\tasks\edit-task\edit-task.component.html" />
+    <Content Include="app\tasks\edit-task\edit-task.component.css" />
+    <Content Include="app\tasks\task-list\task-list.component.css" />
+    <Content Include="app\tasks\task-list\task-list.component.html" />
+    <Content Include="app\tasks\todo-page.component.html" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="gulpfile.js" />
     <Content Include="packages.config" />
-    <Content Include="api\products\products.json" />
+    <Content Include="api\tasks\tasks.json" />
     <Content Include="app\home\welcome.component.js.map" />
     <Content Include="package.json" />
+    <Content Include="systemjs.config.js" />
     <Content Include="tsconfig.json" />
     <Content Include="typings.json" />
-    <Content Include="app\app.component.js.map" />
     <Content Include="app\main.js.map" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\Sass\neuron-style.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -106,14 +125,36 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app\app.component.ts" />
+    <TypeScriptCompile Include="app\app.module.ts" />
+    <TypeScriptCompile Include="app\app.routing.ts" />
+    <TypeScriptCompile Include="app\app.providers.ts" />
+    <TypeScriptCompile Include="app\avatar\avatar.component.ts" />
+    <TypeScriptCompile Include="app\blog\edit-blog-entry\edit-blog-entry.component.ts" />
     <TypeScriptCompile Include="app\home\welcome.component.ts" />
     <TypeScriptCompile Include="app\main.ts" />
+    <TypeScriptCompile Include="app\shared\interfaces.ts" />
+    <TypeScriptCompile Include="app\shared\menu\menu-item.component.ts" />
+    <TypeScriptCompile Include="app\shared\menu\menu.component.ts" />
+    <TypeScriptCompile Include="app\shared\utilities\emitter.service.ts" />
+    <TypeScriptCompile Include="app\shared\utilities\config.service.ts" />
+    <TypeScriptCompile Include="app\shared\services\blog.service.ts" />
     <TypeScriptCompile Include="app\shared\star.component.ts" />
-    <TypeScriptCompile Include="app\tasks\edit-task.component.ts" />
-    <TypeScriptCompile Include="app\tasks\task-filter.pipe.ts" />
-    <TypeScriptCompile Include="app\tasks\task-list.component.ts" />
-    <TypeScriptCompile Include="app\tasks\task.service.ts" />
-    <TypeScriptCompile Include="app\tasks\task.ts" />
+    <TypeScriptCompile Include="app\shared\utilities\items.service.ts" />
+    <TypeScriptCompile Include="app\blog\blog-entry-list\blog-entry-list.component.ts" />
+    <TypeScriptCompile Include="app\blog\shared\blog.service.ts" />
+    <TypeScriptCompile Include="app\blog\shared\blog-entry.ts" />
+    <TypeScriptCompile Include="app\blog\blog.component.ts" />
+    <TypeScriptCompile Include="app\tasks\edit-task\edit-task.component.ts" />
+    <TypeScriptCompile Include="app\tasks\task-details\task-details.component.ts" />
+    <TypeScriptCompile Include="app\tasks\shared\task-filter.pipe.ts" />
+    <TypeScriptCompile Include="app\tasks\task-list\task-list.component.ts" />
+    <TypeScriptCompile Include="app\tasks\shared\task.service.ts" />
+    <TypeScriptCompile Include="app\tasks\shared\task.ts" />
+    <TypeScriptCompile Include="app\tasks\todo-page.component.ts" />
+    <TypeScriptCompile Include="app\utilities\apiHelper.service.ts" />
+    <TypeScriptCompile Include="app\utilities\asObservable.ts" />
+    <TypeScriptCompile Include="app\rxjs-operators.ts" />
+    <TypeScriptCompile Include="typings\browser\ambient\es6-shim\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -140,8 +181,7 @@
           <IISUrl>http://localhost:16712/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl>http://localhost:3000/</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
@@ -153,7 +193,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\BuildWebCompiler.1.11.315\build\BuildWebCompiler.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\BuildWebCompiler.1.11.315\build\BuildWebCompiler.targets'))" />
   </Target>
+  <Import Project="..\packages\BuildWebCompiler.1.11.315\build\BuildWebCompiler.targets" Condition="Exists('..\packages\BuildWebCompiler.1.11.315\build\BuildWebCompiler.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
