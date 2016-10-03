@@ -16,9 +16,20 @@ namespace ApiNeuron
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets();
+            }
+
+            builder.AddEnvironmentVariables();
+
             Configuration = builder.Build();
+
+
+            string test = Configuration["MySecret"];
+
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -26,7 +37,7 @@ namespace ApiNeuron
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = @"Server=tcp:neuronserver.database.windows.net,1433;Initial Catalog=NeuronDb;Persist Security Info=False;User ID=dmitru;Password=zaq1@WSX;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            var connection = Configuration["NeuronDatabaseConnection"];
                 
             services.AddDbContext<NeuronContext>(options => options.UseSqlServer(connection));
 
