@@ -3,6 +3,11 @@
  * Adjust as necessary for your application needs.
  */
 (function (global) {
+    var paths = {
+        // paths serve as alias
+        'npm:': 'node_modules/'
+    };
+
     // map tells the System loader where to look for things
     var map = {
         'app': 'app', // 'dist',
