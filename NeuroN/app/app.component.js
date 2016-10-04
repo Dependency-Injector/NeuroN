@@ -21,7 +21,7 @@ System.register(['@angular/core', '@angular/router'], function(exports_1, contex
                 router_1 = router_1_1;
             }],
         execute: function() {
-            let AppComponent = class AppComponent {
+            AppComponent = class AppComponent {
                 constructor(router) {
                     this.router = router;
                     this.pageTitle = 'NeuroN FrameworK';

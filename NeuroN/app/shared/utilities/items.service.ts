@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@angular/core';
+﻿/*import { Injectable } from '@angular/core';
 import { IPredicate } from '../interfaces';
 
 import * as _ from 'lodash';
@@ -41,4 +41,4 @@ export class ItemsService {
     getSerialized<T>(arg: any): T {
         return <T>JSON.parse(JSON.stringify(arg));
     }
-}
+}*/

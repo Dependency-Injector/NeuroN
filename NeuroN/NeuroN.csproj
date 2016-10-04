@@ -25,7 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <TypeScriptToolsVersion>2.0</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -79,6 +79,7 @@
     <Content Include="app\blog\blog-entry-list\blog-entry-list.component.css" />
     <Content Include="app\blog\blog-entry-list\blog-entry-list.component.html" />
     <Content Include="app\blog\blog.component.html" />
+    <Content Include="app\shared\notification\notification.component.html" />
     <Content Include="app\tasks\task-details\task-details.component.html" />
     <Content Include="app\tasks\edit-task\edit-task.component.html" />
     <Content Include="app\tasks\edit-task\edit-task.component.css" />
@@ -89,7 +90,6 @@
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="gulpfile.js" />
-    <Content Include="packages.config" />
     <Content Include="api\tasks\tasks.json" />
     <Content Include="app\home\welcome.component.js.map" />
     <Content Include="package.json" />
@@ -103,6 +103,12 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="Content\Sass\neuron-style.scss" />
+    <None Include="Properties\PublishProfiles\NeuronApp - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\NeuronApp - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\NeuronApp - Web Deploy %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\NeuronApp - Web Deploy.pubxml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -136,6 +142,9 @@
     <TypeScriptCompile Include="app\main.ts" />
     <TypeScriptCompile Include="app\shared\menu\menu-item.component.ts" />
     <TypeScriptCompile Include="app\shared\menu\menu.component.ts" />
+    <TypeScriptCompile Include="app\shared\notification\notification.component.ts" />
+    <TypeScriptCompile Include="app\shared\notification\shared\notification.ts" />
+    <TypeScriptCompile Include="app\shared\notification\shared\notification.service.ts" />
     <TypeScriptCompile Include="app\shared\utilities\emitter.service.ts" />
     <TypeScriptCompile Include="app\shared\utilities\config.service.ts" />
     <TypeScriptCompile Include="app\shared\star\star.component.ts" />

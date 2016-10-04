@@ -6,10 +6,20 @@ Click here to learn more. http://go.microsoft.com/fwlink/?LinkId=518007
 
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var concat = require('gulp-concat');
 
 gulp.task('styles', function () {
     gulp.src('./Content/Sass/neuron-style.scss')
         .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('./Content/'));
+});
+
+gulp.task('css', function () {
+
+    gulp.src('./app/**/*.css')
+        //.pipe(minifyCSS())
+        //.pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9'))
+        .pipe(concat('style.min.css'))
         .pipe(gulp.dest('./Content/'));
 });
 

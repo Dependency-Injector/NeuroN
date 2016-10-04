@@ -45,11 +45,10 @@ export class TaskService {
                 return todos;
             })
             .catch(this.handleError)
-            .subscribe(res => {
+            .subscribe((res: Array<ITask>) => {
                 this.tasks = res;
-                this.stream.next(res)
-            }
-            );
+                this.stream.next(res);
+            });
     }
 
     addTodo(newTodo: ITask): Observable<any> {
@@ -107,7 +106,7 @@ export class TaskService {
                     return response.json();
                 })
                 .catch(this.handleError)
-                .subscribe(task => {
+                .subscribe((task: ITask) => {
                     let createdTask = new Task(task.id, task.title, task.deadline, task.isFinished);
                     this.tasks.push(createdTask);
                     this.stream.next(this.tasks);

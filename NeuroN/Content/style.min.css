@@ -1,0 +1,82 @@
+li {
+    font-size: large;
+}
+
+div.panel-heading {
+   font-size: x-large; 
+}
+
+#wrapper {
+    padding-left: 250px;
+}
+
+#sidebar-wrapper {
+    width: 250px;
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #000;
+}
+
+#sidebar-wrapper h4 {
+    color: #ccc;
+}
+thead {
+    color: #127FB7;
+}
+.nn-menu-item {
+    line-height: 3em;
+    cursor: pointer;
+}
+
+.nn-menu-icon {
+    margin-right: 10px;
+}
+.nn-menu-area {
+    /*position: relative;
+    background-color: #333;
+    color: #ccc;
+    padding-left: 0;
+    width: 200px;
+    min-height: 100vh;
+    padding-top: 30px;*/
+}
+
+.nn-menu {
+    list-style-type: none;
+    vertical-align: top;
+    padding-left: 0;
+}
+
+.nn-menu li {
+    text-indent: 20px;
+    line-height: 40px;
+}
+
+.nn-menu li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+
+.nn-menu  li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.crop {
+    overflow: hidden;
+}
+div {
+    cursor: pointer;
+}
+thead {
+    color: #127FB7;
+}
+thead {
+    color: #127FB7;
+}

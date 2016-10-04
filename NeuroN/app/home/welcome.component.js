@@ -18,7 +18,7 @@ System.register(['@angular/core'], function(exports_1, context_1) {
                 core_1 = core_1_1;
             }],
         execute: function() {
-            let WelcomeComponent = class WelcomeComponent {
+            WelcomeComponent = class WelcomeComponent {
                 constructor() {
                     this.pageTitle = "Welcome";
                 }

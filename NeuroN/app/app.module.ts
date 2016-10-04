@@ -15,10 +15,12 @@ import { BlogComponent } from './blog/blog.component';
 import { BlogEntryListComponent } from './blog/blog-entry-list/blog-entry-list.component';
 import { EditBlogEntryComponent } from './blog/edit-blog-entry/edit-blog-entry.component';
 import { AvatarComponent } from './avatar/avatar.component';
+import { NotificationComponent } from './shared/notification/notification.component';
 
 import { TaskService } from './tasks/shared/task.service';
 import { BlogService } from './blog/shared/blog.service';
 import { AvatarService } from './avatar/shared/avatar.service';
+import { NotificationService } from './shared/notification/shared/notification.service';
 import { ApiHelper } from './utilities/apiHelper.service';
 
 @NgModule({
@@ -51,13 +53,15 @@ import { ApiHelper } from './utilities/apiHelper.service';
         EditBlogEntryComponent,
 
         // Avatar page
-        AvatarComponent
+        AvatarComponent,
+        NotificationComponent
     ],
 
     providers: [
         TaskService,
         BlogService,
         AvatarService,
+        NotificationService,
 
         ApiHelper
     ],

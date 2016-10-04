@@ -1,6 +1,8 @@
 ﻿import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { NotificationComponent } from './shared/notification/notification.component';
+
 @Component({
     selector: 'nn-app',
     templateUrl: 'app/app.component.html'
