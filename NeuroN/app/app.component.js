@@ -1,4 +1,4 @@
-System.register(['@angular/core', '@angular/router'], function(exports_1, context_1) {
+System.register(['@angular/core', '@angular/router', './shared/utilities/channel.service'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['@angular/core', '@angular/router'], function(exports_1, contex
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1;
+    var core_1, router_1, channel_service_1;
     var AppComponent;
     return {
         setters:[
@@ -19,17 +19,30 @@ System.register(['@angular/core', '@angular/router'], function(exports_1, contex
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (channel_service_1_1) {
+                channel_service_1 = channel_service_1_1;
             }],
         execute: function() {
             AppComponent = class AppComponent {
-                constructor(router) {
+                constructor(router, channelService) {
                     this.router = router;
+                    this.channelService = channelService;
                     this.pageTitle = 'NeuroN FrameworK';
                     this.taskListTitle = 'Todo list';
+                    this.connectionState = this.channelService.connectionState.map((state) => {
+                        return channel_service_1.ConnectionState[state];
+                    });
+                    this.channelService.error.subscribe((error) => { console.warn(error); }, (error) => { console.error("errors$ error", error); });
+                    this.channelService.starting.subscribe(() => { console.log("signalr service has been started"); }, () => { console.log("signalr service failed to start"); });
                 }
                 onRouteSelected(route) {
                     console.log(route);
                     this.router.navigate([route]);
+                }
+                ngOnInit() {
+                    console.log("starting channel service");
+                    this.channelService.start();
                 }
             };
             AppComponent = __decorate([
@@ -37,7 +50,7 @@ System.register(['@angular/core', '@angular/router'], function(exports_1, contex
                     selector: 'nn-app',
                     templateUrl: 'app/app.component.html'
                 }), 
-                __metadata('design:paramtypes', [router_1.Router])
+                __metadata('design:paramtypes', [router_1.Router, channel_service_1.ChannelService])
             ], AppComponent);
             exports_1("AppComponent", AppComponent);
         }

@@ -21,8 +21,12 @@ import { TaskService } from './tasks/shared/task.service';
 import { BlogService } from './blog/shared/blog.service';
 import { AvatarService } from './avatar/shared/avatar.service';
 import { NotificationService } from './shared/notification/shared/notification.service';
-import { ChannelService } from './shared/utilities/channel.service';
+import { ChannelService, SignalrWindow, ChannelConfig } from './shared/utilities/channel.service';
 import { ApiHelper } from './utilities/apiHelper.service';
+
+let channelConfig = new ChannelConfig();
+channelConfig.url = "http://localhost:9123/signalr";
+channelConfig.hubName = "EventHub";
 
 @NgModule({
     imports: [
@@ -33,7 +37,6 @@ import { ApiHelper } from './utilities/apiHelper.service';
 
         // External modules
         DatepickerModule,
-
         routing
     ],
 
@@ -64,7 +67,9 @@ import { ApiHelper } from './utilities/apiHelper.service';
         AvatarService,
         NotificationService,
         ChannelService,
-
+        {   provide: SignalrWindow, useValue: window },
+        {   provide: "channel.config", useValue: channelConfig },
+        
         ApiHelper
     ],
 

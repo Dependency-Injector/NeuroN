@@ -10,12 +10,18 @@
             <nn-menu-item label="Avatar" icon="fa-user" route="avatar" (menuItemSelected)="onRouteSelected($event)"></nn-menu-item>
         </nn-menu>
 
-        <div>
-            <nn-notification></nn-notification>
-        </div>
+        
     </div>
 
     <div class="container-fluid">
+        <div class="flex-row" style="    display: inline-block;">
+            <nn-notification class="flex" [eventName]="'longTask.status'" [apiUrl]="'http://localhost:9123/tasks/long'"></nn-notification>
+        </div>
+
+        <div class="flex-row" style="    display: inline-block;">
+            <nn-notification class="flex" [eventName]="'shortTask.status'" [apiUrl]="'http://localhost:9123/tasks/short'"></nn-notification>
+        </div>
+
         <router-outlet></router-outlet>
     </div>
 </div>

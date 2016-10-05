@@ -1,10 +1,15 @@
-<div class="crop">
-    
-    <div style="width: 86px;" >
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
+<div>
+    <h4>Task component bound to '{{eventName}}</h4>
+</div>
+<div class="commands">
+    <textarea
+        class="console"
+        cols="50"
+        rows="15"
+        disabled="disabled"
+        [value]="messages"></textarea>
+
+    <div class="commands_input">
+        <button (click)="callApi()">Call api</button>
     </div>
 </div>
