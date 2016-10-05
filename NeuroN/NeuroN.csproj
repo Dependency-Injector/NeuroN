@@ -145,6 +145,7 @@
     <TypeScriptCompile Include="app\shared\notification\notification.component.ts" />
     <TypeScriptCompile Include="app\shared\notification\shared\notification.ts" />
     <TypeScriptCompile Include="app\shared\notification\shared\notification.service.ts" />
+    <TypeScriptCompile Include="app\shared\utilities\channel.service.ts" />
     <TypeScriptCompile Include="app\shared\utilities\emitter.service.ts" />
     <TypeScriptCompile Include="app\shared\utilities\config.service.ts" />
     <TypeScriptCompile Include="app\shared\star\star.component.ts" />
