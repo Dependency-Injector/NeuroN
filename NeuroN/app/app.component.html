@@ -1,19 +1,17 @@
 ﻿<div id="wrapper">
-    <div id="sidebar-wrapper">
-        <h4>
-            NeuroN Framework
-        </h4>
-
+    <div id="sidebar">
         <nn-menu>
             <nn-menu-item label="What's new" icon="fa-tachometer" route="blog" (menuItemSelected)="onRouteSelected($event)"></nn-menu-item>
             <nn-menu-item label="Todo" icon="fa-check" route="tasks" (menuItemSelected)="onRouteSelected($event)"></nn-menu-item>
             <nn-menu-item label="Avatar" icon="fa-user" route="avatar" (menuItemSelected)="onRouteSelected($event)"></nn-menu-item>
         </nn-menu>
-
-        
     </div>
 
-    <div class="container-fluid">
+    <div id="content">
+        <router-outlet></router-outlet>
+    </div>
+
+    <!--<div class="container-fluid">
         <div class="flex-row" style="    display: inline-block;">
             <nn-notification class="flex" [eventName]="'longTask.status'" [apiUrl]="'http://localhost:9123/tasks/long'"></nn-notification>
         </div>
@@ -23,7 +21,7 @@
         </div>
 
         <router-outlet></router-outlet>
-    </div>
+    </div>-->
 </div>
 
 

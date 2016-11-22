@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
     connectionState: Observable<string>;
 
     constructor(private router: Router, private channelService: ChannelService) {
-        this.connectionState = this.channelService.connectionState.map((state: ConnectionState) => {
+       /* this.connectionState = this.channelService.connectionState.map((state: ConnectionState) => {
             return ConnectionState[state];
         });
 
@@ -23,19 +23,16 @@ export class AppComponent implements OnInit {
 
         this.channelService.starting.subscribe(
             () => { console.log("signalr service has been started"); },
-            () => { console.log("signalr service failed to start"); });
+            () => { console.log("signalr service failed to start"); });*/
     }
-
-    pageTitle: string = 'NeuroN FrameworK';
-    taskListTitle: string = 'Todo list';
-
+    
     onRouteSelected(route: string): void {
         console.log(route);
         this.router.navigate([route]);
     }
 
     ngOnInit() {
-        console.log("starting channel service");
-        this.channelService.start();
+       // console.log("starting channel service");
+       // this.channelService.start();
     }
 }

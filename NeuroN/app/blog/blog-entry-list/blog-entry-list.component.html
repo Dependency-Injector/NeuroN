@@ -1,20 +1,16 @@
-﻿<div class="panel panel-primary">
-    <div class="panel-heading">
-        {{pageTitle}}
-    </div>
-    <div class="panel-body">
-        <div class="table-responsive">
-            <div>Entries count: {{posts.length}}</div>
-        </div>
-
-        <div *ngFor="let post of posts">
-            <h3>{{post.title}}</h3> <h5>{{post.created}}</h5>
-            <p>{{post.content}}</p>
-            <div>
-                <button class="btn btn-warning" (click)="editPost(post.id)">Edit</button>
-                <button class="btn btn-danger" (click)="removePost(post.id)">Remove</button>
+﻿<div class="row">
+    <div class="col-md-12">
+        <section *ngFor="let post of posts" class="tile">
+            <div class="tile-header dvd dvd-btm">
+                <h3>{{post.title}}</h3> <h5>{{post.created | date}}</h5>
             </div>
-            <hr />
-        </div>
+            <div class="tile-body">
+                {{post.content}}
+            </div>
+            <div class="tile-footer dvd dvd-top">
+                <button class="btn btn-default" (click)="editPost(post.id)">Edit</button>
+                <button class="btn btn-default" (click)="removePost(post.id)">Remove</button>
+            </div>
+        </section>
     </div>
 </div>

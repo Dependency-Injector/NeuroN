@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using ApiNeuron.Models;
 
 namespace ApiNeuron.Repositories
@@ -49,6 +51,11 @@ namespace ApiNeuron.Repositories
                 context.SaveChanges();
             }
             return avatarToRemove;
+        }
+
+        public Avatar Get(Expression<Func<Avatar, bool>> predicate)
+        {
+            throw new NotImplementedException();
         }
     }
 }

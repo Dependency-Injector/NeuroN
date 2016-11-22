@@ -11,25 +11,14 @@ import { TaskService } from './../shared/task.service';
 })
 
 export class TaskListComponent implements OnInit, OnChanges {
-    @Output() editTaskClicked: EventEmitter<number> = new EventEmitter<number>();
-    
-    tasks: ITask[];
-    imageHeight: number = 50;
-    imageWidth: number = 40;
-    showImage: boolean = false;
-    listFilter: string = 'task';
-    errorMessage: any;
-    pageTitle: string = 'Todo';
+    @Input() tasks: Array<ITask> = new Array<ITask>();
+    @Output() editTaskClicked: EventEmitter<ITask> = new EventEmitter<ITask>();
 
     constructor(private taskService: TaskService) {
     }
 
-    toggleImage(): void {
-        this.showImage = !this.showImage;
-    }
-
-    editTask(taskId: number): void {
-        this.editTaskClicked.emit(taskId);
+    editTask(task: ITask): void {
+        this.editTaskClicked.emit(task);
     }
 
     finishTask(taskId: number): void {
@@ -41,19 +30,10 @@ export class TaskListComponent implements OnInit, OnChanges {
     }
 
     ngOnInit(): void {
-        this.taskService.todos.subscribe((tasks: ITask[]) => {
-            this.tasks = tasks;
-            console.log('task list has new list');
-        });
     }
 
     ngOnChanges(changes): void {
         if (changes.tasks)
             this.tasks = changes.tasks.currentValue;
     }
-
-    onPriorityClicked(message: string): void {
-        //this.pageTitle = "Product list " + message;
-    }
-
 }

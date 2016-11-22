@@ -1,8 +1,14 @@
-﻿<div class="row" style="margin-top: 30px;">
-    <div class="col-md-8">
-        <nn-blog-entry-list (editPostClicked)="onEditPost($event)"></nn-blog-entry-list>
+﻿<div class="page">
+    <div class="pageheader">
+        <h2>Blog</h2>
     </div>
-    <div class="col-md-8">
-        <nn-edit-blog-entry [(postId)]="editedPostId"></nn-edit-blog-entry>
+
+    <div class="row">
+        <div class="col-md-6">
+            <nn-blog-entry-list (editPostClicked)="onEditPost($event)"></nn-blog-entry-list>
+        </div>
+        <div class="col-md-6">
+            <nn-edit-blog-entry [(postId)]="editedPostId"></nn-edit-blog-entry>
+        </div>
     </div>
 </div>

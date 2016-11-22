@@ -10,16 +10,26 @@ import { BlogService } from './../shared/blog.service';
 
 export class BlogEntryListComponent implements OnInit {
     @Output() editPostClicked: EventEmitter<number> = new EventEmitter<number>();
-    
+
     posts: IBlogEntry[];
     pageTitle: string = 'Blog entries';
 
     constructor(private blogService: BlogService) {
         this.posts = new Array<IBlogEntry>();
     }
-    
+
     ngOnInit(): void {
-        this.blogService.posts.subscribe(posts => this.posts = posts, err => console.log(err));
+        this.blogService.posts.subscribe(posts => {
+            this.posts = posts.sort(this.compare);
+        }, err => console.log(err));
+    }
+
+    compare(a: IBlogEntry, b: IBlogEntry): number {
+        if (a.created > b.created)
+            return -1;
+        if (a.created < b.created)
+            return 1;
+        return 0;
     }
     
     editPost(postId: number): void {

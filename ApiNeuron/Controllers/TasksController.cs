@@ -12,9 +12,9 @@ namespace ApiNeuron.Controllers
     [EnableCors("MyPolicy")]
     public class TasksController : Controller
     {
-        private ITaskRepository taskRepository;
+        private IRepository<Task> taskRepository;
 
-        public TasksController(ITaskRepository taskRepository)
+        public TasksController(IRepository<Task> taskRepository)
         {
             this.taskRepository = taskRepository;
         }
@@ -36,6 +36,22 @@ namespace ApiNeuron.Controllers
             }
 
             return new ObjectResult(task);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Search(string searchTerm)
+        {
+            return NotFound();
+            /*if (string.IsNullOrEmpty(searchTerm))
+                return BadRequest("No search term");
+
+            var task = taskRepository.Get(id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            return new ObjectResult(task);*/
         }
         
         [HttpPost]

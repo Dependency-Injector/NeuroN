@@ -1,5 +1,5 @@
-﻿import { Component } from '@angular/core';
-import 'rxjs/Rx';   // load all features
+﻿import { Component, OnInit, OnChanges } from '@angular/core';
+import 'rxjs/Rx';
 
 import { ITask, Task } from './shared/task';
 import { TaskListComponent } from './task-list/task-list.component';
@@ -10,11 +10,33 @@ import { TaskService } from './shared/task.service';
     templateUrl: 'app/tasks/todo-page.component.html'
 })
 
-export class TodoPageComponent {
+export class TodoPageComponent implements OnInit, OnChanges {
     pageTitle: string = 'Todo page';
-    editedTaskId: number = null;
+    editedTask: ITask = null;
+
+    tasks: ITask[];
+    overdueTasks: ITask[];
+    todayTasks: ITask[];
+    tomorrowTasks: ITask[];
+    furtherTasks: ITask[];
+
+    constructor(private taskService: TaskService) {
+        this.editedTask = new Task();
+    }
 
     onEditTask($event) {
-        this.editedTaskId = $event;
+        this.editedTask = $event;
+    }
+
+    ngOnChanges(changes): void {
+    }
+    
+    ngOnInit(): void {
+        this.taskService.$tasks.subscribe((tasks: Task[]) => {
+            this.overdueTasks = tasks.filter(task => task.getRemainingDays() < 0);
+            this.todayTasks = tasks.filter(task => task.getRemainingDays() === 0);
+            this.tomorrowTasks = tasks.filter(task => task.getRemainingDays() === 1);
+            this.furtherTasks = tasks.filter(task => task.getRemainingDays() > 1);
+        });
     }
 }

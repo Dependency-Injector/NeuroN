@@ -7,11 +7,9 @@ import { IAvatar } from './shared/avatar';
 })
 
 export class AvatarComponent implements OnInit {
-    pageTitle: string = 'avatar page';
     avatar: IAvatar;
 
     constructor(private avatarService: AvatarService) {
-        this.pageTitle = this.pageTitle + " . Route params: ";// + this.routeParams.get('id');
     }
 
     ngOnInit(): void {

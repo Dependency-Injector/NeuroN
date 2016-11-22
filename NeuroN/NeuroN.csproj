@@ -83,15 +83,16 @@
     <Content Include="app\tasks\task-details\task-details.component.html" />
     <Content Include="app\tasks\edit-task\edit-task.component.html" />
     <Content Include="app\tasks\edit-task\edit-task.component.css" />
+    <Content Include="app\temp\sample-file.html" />
     <Content Include="app\tasks\task-list\task-list.component.css" />
     <Content Include="app\tasks\task-list\task-list.component.html" />
     <Content Include="app\tasks\todo-page.component.html" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\zajebanecssy.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="gulpfile.js" />
     <Content Include="api\tasks\tasks.json" />
-    <Content Include="app\home\welcome.component.js.map" />
     <Content Include="package.json" />
     <Content Include="systemjs.config.js" />
     <Content Include="tsconfig.json" />
@@ -103,6 +104,7 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="Content\Sass\neuron-style.scss" />
+    <Content Include="bs-config.json" />
     <None Include="Properties\PublishProfiles\NeuronApp - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\NeuronApp - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\NeuronApp - Web Deploy %283%29.pubxml" />
@@ -119,8 +121,6 @@
   <ItemGroup>
     <Content Include="app\app.component.css" />
     <Content Include="app\assets\images\logo.jpg" />
-    <Content Include="app\home\welcome.component.html" />
-    <Content Include="app\home\welcome.component.js" />
     <Content Include="app\shared\star\star.component.css" />
     <Content Include="app\shared\star\star.component.html" />
     <Content Include="index.html" />
@@ -133,12 +133,10 @@
     <TypeScriptCompile Include="app\app.component.ts" />
     <TypeScriptCompile Include="app\app.module.ts" />
     <TypeScriptCompile Include="app\app.routing.ts" />
-    <TypeScriptCompile Include="app\app.providers.ts" />
     <TypeScriptCompile Include="app\avatar\avatar.component.ts" />
     <TypeScriptCompile Include="app\avatar\shared\avatar.ts" />
     <TypeScriptCompile Include="app\avatar\shared\avatar.service.ts" />
     <TypeScriptCompile Include="app\blog\edit-blog-entry\edit-blog-entry.component.ts" />
-    <TypeScriptCompile Include="app\home\welcome.component.ts" />
     <TypeScriptCompile Include="app\main.ts" />
     <TypeScriptCompile Include="app\shared\menu\menu-item.component.ts" />
     <TypeScriptCompile Include="app\shared\menu\menu.component.ts" />
@@ -157,6 +155,8 @@
     <TypeScriptCompile Include="app\tasks\edit-task\edit-task.component.ts" />
     <TypeScriptCompile Include="app\tasks\task-details\task-details.component.ts" />
     <TypeScriptCompile Include="app\tasks\shared\task-filter.pipe.ts" />
+    <Content Include="app\temp\sample-file2.js" />
+    <TypeScriptCompile Include="app\temp\sample-file.ts" />
     <TypeScriptCompile Include="app\tasks\task-list\task-list.component.ts" />
     <TypeScriptCompile Include="app\tasks\shared\task.service.ts" />
     <TypeScriptCompile Include="app\tasks\shared\task.ts" />

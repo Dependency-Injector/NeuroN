@@ -1,68 +1,11 @@
-﻿<div class="panel panel-primary">
-    <div class="panel-heading">
-        {{pageTitle}}
-    </div>
-    <div class="panel-body">
-        <!--<div class="row">
-            <div class="col-md-2">Filter by:</div>
-            <div class="col-md-4">
-                <input type="text" [(ngModel)]="listFilter" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <h3>Filtered by: {{listFilter}}</h3>
-            </div>
-        </div>-->
-
-        <div class="table-responsive">
-        <table class="table" *ngIf='tasks && tasks.length'>
-                <thead>
-                <tr>
-                    <!--<th>
-                        <button class="btn btn-primary" (click)="toggleImage()">{{showImage ? 'Hide' : 'Show'}} image</button>
-                    </th>-->
-                    <th>Title</th>
-                    <th>Deadline</th>
-                    <!--<th>Priority</th>-->
-                    <th>Finished</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-            <tbody>
-            <!--<tr *ngFor="#task of tasks | taskFilter:listFilter">-->
-            <tr *ngFor="let task of tasks">
-                <!-- <td>
-                    <img *ngIf="showImage"
-                         [src]="task.imageUrl"
-                         [title]="task.title"
-                         [style.width.px]="imageWidth"
-                         [style.height.px]="imageHeight"/>
-                    $1$<img src="{{task.imageUrl}}"/> #1#
-                </td>-->
-                <td>
-                    <a [routerLink]="['TaskDetails', {id: task.id}]">{{task.title}}</a>
-                </td>
-                <td>{{setDate(task.deadline) | date}}</td>
-                <td>
-                    <span *ngIf="task.isFinished">
-                        <i class="fa fa-check"></i>
-                    </span>
-                </td>
-                <td>
-                    <button class="btn btn-primary" (click)="editTask(task.id)">Edit</button>
-                    <button *ngIf="!task.isFinished" class="btn btn-primary" (click)="finishTask(task.id)">Finish</button>
-                </td>
-            </tr>
-            </tbody>
-            <!--<tfoot>
-            <tr>
-                <td>
-                    <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"></pagination>
-                </td>
-            </tr>
-            </tfoot>-->
-            </table>
-        </div>
+﻿<div *ngFor="let task of tasks" class="list-item">
+    <span>
+        <i class="fa fa-check-square-o" *ngIf="task.isFinished"></i>
+        <i class="fa fa-square-o" *ngIf="!task.isFinished"></i>
+    </span>
+    <span>{{task.title}}</span>
+    <div class="pull-right">
+        <button type="button" class="btn btn-default" (click)="editTask(task)">Edit</button>
+        <button type="button" *ngIf="!task.isFinished" class="btn btn-default" (click)="finishTask(task.id)">Finish</button>
     </div>
 </div>

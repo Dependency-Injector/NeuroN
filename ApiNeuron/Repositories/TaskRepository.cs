@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using ApiNeuron.Models;
 using Task = ApiNeuron.Models.Task;
 
 namespace ApiNeuron.Repositories
 {
-    public class TaskRepository : ITaskRepository
+    public class TaskRepository : IRepository<Task>
     {
         private readonly NeuronContext context;
         
@@ -21,7 +23,12 @@ namespace ApiNeuron.Repositories
 
         public Task Get(int id)
         {
-            return context.Tasks.FirstOrDefault(t => t.Id == id);
+            return Get(t => t.Id == id);
+        }
+
+        public Task Get(Expression<Func<Task, bool>> predicate)
+        {
+            return context.Tasks.FirstOrDefault(predicate);
         }
 
         public Task Add(Task task)
@@ -51,5 +58,7 @@ namespace ApiNeuron.Repositories
 
             return taskToRemove;
         }
+
+        
     }
 }

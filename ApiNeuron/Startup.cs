@@ -38,7 +38,7 @@ namespace ApiNeuron
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = Configuration["NeuronDatabaseConnection"];
-                
+            
             services.AddDbContext<NeuronContext>(options => options.UseSqlServer(connection));
 
             services.AddCors(options =>
@@ -46,11 +46,10 @@ namespace ApiNeuron
                 options.AddPolicy("MyPolicy", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
 
-
             // Add framework services.
             services.AddMvc();
             
-            services.AddScoped<ITaskRepository, TaskRepository>();
+            services.AddScoped<IRepository<Task>, TaskRepository>();
             services.AddScoped<IRepository<Post>, PostRepository>();
             services.AddScoped<IRepository<Avatar>, AvatarRepository>();
         }

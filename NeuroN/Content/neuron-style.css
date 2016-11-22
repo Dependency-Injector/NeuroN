@@ -1,3 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Dosis);
+hr.line-full {
+  margin: 20px, -20px; }
+
+hr.line-dashed {
+  border-style: dashed; }
+
 .site-menubar {
   position: fixed;
   z-index: 1400;
@@ -12,3 +19,100 @@
 
 .site-menu {
   color: pink; }
+
+section {
+  display: block; }
+
+.tile {
+  position: relative;
+  margin-bottom: 20px;
+  color: #616f77;
+  background-color: #fff;
+  opacity: 1;
+  transition: opacity .25s ease-out; }
+  .tile .tile-body, .tile .tile-footer, .tile .tile-header {
+    position: relative;
+    padding: 15px; }
+
+.tile-header {
+  padding: 8px 15px; }
+  .tile-header h1 {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 26px; }
+
+.tile-body {
+  position: relative;
+  padding: 15px; }
+
+.dvd {
+  border-color: rgba(0, 0, 0, 0.1);
+  border-style: solid;
+  border-width: 0; }
+  .dvd.dvd-btm {
+    border-bottom-width: 1px; }
+  .dvd.dvd-top {
+    border-top-width: 1px; }
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 250px;
+  padding: 0;
+  background-color: #131e25; }
+
+#sidebar-wrap {
+  width: 100%;
+  height: 100%; }
+
+#content {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 250px;
+  width: auto;
+  padding-left: 0;
+  padding-top: 0;
+  z-index: 1;
+  background-color: #e7eaeb;
+  overflow: scroll;
+  overflow-x: hidden; }
+
+.page {
+  padding: 20px; }
+
+.pageheader {
+  margin-bottom: 30px; }
+
+ul.list-type {
+  padding: 0;
+  margin: 7px 0 7px 20px;
+  list-style-type: none; }
+  ul.list-type li {
+    padding: 2px 2px 2px 0;
+    position: relative; }
+    ul.list-type li:before {
+      position: absolute;
+      left: -18px; }
+
+.btn {
+  border-radius: 0;
+  outline: 0; }
+  .btn.btn-default {
+    color: #616f77;
+    border-color: #cdd3d7; }
+    .btn.btn-default:hover {
+      background-color: #f2f3f4; }
+    .btn.btn-default:active {
+      background-color: #eaeced; }
+
+.list-item {
+  line-height: 40px; }
+
+.custom-font {
+  font-family: Dosis, Arial, sans-serif; }

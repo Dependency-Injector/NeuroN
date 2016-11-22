@@ -1,8 +1,39 @@
-﻿<div class="row" style="margin-top: 30px;">
-    <div class="col-md-6">
-        <nn-edit-task [(taskId)]="editedTaskId"></nn-edit-task>
+﻿<div class="page">
+    <div class="pageheader">
+        <h2>Todo page</h2>
     </div>
-    <div class="col-md-6">
-        <nn-task-list (editTaskClicked)="onEditTask($event)"></nn-task-list>
+
+    <div class="row">
+        <div class="col-md-6">
+            <section class="tile">
+                <div class="tile-header dvd dvd-btm">
+                    <h1 class="custom-font">
+                        Todo
+                    </h1>
+                </div>
+
+                <div class="tile-body dvd dvd-btm">
+                    <h3>Overdue</h3>
+                    <nn-task-list [(tasks)]="overdueTasks" (editTaskClicked)="onEditTask($event)"></nn-task-list>
+                    <hr class="line-full" />
+
+                    <h3>Today</h3>
+                    <nn-task-list [(tasks)]="todayTasks" (editTaskClicked)="onEditTask($event)"></nn-task-list>
+                    <hr class="line-full" />
+
+                    <h3>Tomorrow</h3>
+                    <nn-task-list [(tasks)]="tomorrowTasks" (editTaskClicked)="onEditTask($event)"></nn-task-list>
+                    <hr class="line-full"/>
+
+                    <h3>Further</h3>
+                    <nn-task-list [(tasks)]="furtherTasks" (editTaskClicked)="onEditTask($event)"></nn-task-list>
+                    <hr class="line-full" />
+                </div>
+            </section>
+        </div>
+
+        <div class="col-md-6">
+            <nn-edit-task [(task)]="editedTask"></nn-edit-task>
+        </div>
     </div>
 </div>

@@ -1,5 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import { ITask, Task } from './task';
+import {  Task, ITask } from './task';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
@@ -7,6 +7,8 @@ import { BehaviorSubject } from 'rxjs/Rx';
 import { ApiHelper } from './../../utilities/apiHelper.service';
 
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeAll';
+import Rx from 'rxjs/Rx';
 
 @Injectable()
 
@@ -14,74 +16,61 @@ export class TaskService {
     private azureTasksApiUrl = 'http://apineuro.azurewebsites.net/api/tasks';
     private localApiUrl = 'http://localhost:2243/api/tasks';
 
-    private stream: BehaviorSubject<Array<ITask>>;
-    private tasks: Array<ITask> = [];
+    private stream: BehaviorSubject<Array<Task>>;
+    private tasks: Array<Task> = [];
+    private jsonHeaders: RequestOptions;
 
-    get todos() {
+    get $tasks() {
         return this.stream.asObservable();
     }
-    private xxx: number;
-
-    private jsonHeaders: RequestOptions;
 
     constructor(private http: Http, private apiHelper: ApiHelper) {
         this.tasks = [];
-        this.stream = new BehaviorSubject(new Array<ITask>());
-
+        this.stream = new BehaviorSubject(new Array<Task>());
+       
         this.jsonHeaders = new RequestOptions({ headers: apiHelper.getJsonHeaders() });
         this.loadInitialData();
     }
-
-    translateTask(task: any): Task {
-        return new Task(task.id, task.title, task.deadline, task.isFinished);
-    }
-
-    loadInitialData() {
+    
+    loadInitialData(): void {
         this.http.get(this.localApiUrl)
-            .map((response: Response) => {
-                let resp = response.json();
-                let todos = resp.map(this.translateTask)
-                //let todos = (<Object[]>response.json()).map((task: any) => new Task(task.id, task.title, task.deadline, task.isFinished));
-                return todos;
+            .map(response => response.json())
+            .map((tasks: Array<ITask>) => {
+                let result: Array<Task> = [];
+                tasks.forEach(task => {
+                    result.push(this.translateTask(task));
+                });
+
+                result = result.filter(task => task.isFinished == false);
+                return result;
             })
-            .catch(this.handleError)
-            .subscribe((res: Array<ITask>) => {
-                this.tasks = res;
-                this.stream.next(res);
+            .subscribe((tasksArray: Array<Task>) => {
+                this.tasks = tasksArray;
+                this.stream.next(tasksArray);
+            }, (error) => {
+                console.log("Error: ");
+                console.log(error);
             });
     }
 
-    addTodo(newTodo: ITask): Observable<any> {
-        let obs = this.http.post(this.localApiUrl, JSON.stringify(newTodo), this.jsonHeaders).share();
-
-        obs.subscribe(
-            res => {
-                let t = res.json();
-                let taskObject = new Task(t.id, t.title, t.deadline, t.isFinished);
-
-                var temp = this.stream.getValue();
-                temp.push(taskObject);
-                this.stream.next(temp);
-            }
-        );
-
-        return obs;
+    private translateTask(task: any): Task {
+        return new Task(task.id, task.title, task.deadline, task.isFinished);
     }
-
+    
     private extractData(res: Response) {
         let body = res.json();
         return body.data || {};
     }
 
-    createNewTask(title: string, deadline: string): ITask {
+    createNewTask(title: string, deadline: string): Task {
         return new Task(null, title, deadline, false);
     }
 
-    createNewEmptyTask(): ITask {
+    createNewEmptyTask(): Task {
         return this.createNewTask('', new Date().toDateString());
     }
 
-    removeTask(task: ITask): Observable<any> {
+    removeTask(task: Task): Observable<Response> {
         let obs = this.http.delete(this.localApiUrl + "/" + task.id);
 
         obs.subscribe((res) => {
@@ -119,11 +108,11 @@ export class TaskService {
                     return responseData.json();
                 })
                 //.catch(this.handleError)
-                .subscribe(data => {
-                    let updatedTaskIndex = this.tasks.findIndex(t => t.id == data.id);
+                .subscribe((data: Task) => {
+                    let updatedTaskIndex = this.tasks.findIndex(t => t.id === data.id);
 
                     if (updatedTaskIndex != null) {
-                        this.tasks[updatedTaskIndex] = data;
+                        this.tasks[updatedTaskIndex] = new Task(data.id, data.title, data.deadline, data.isFinished);
                         this.stream.next(this.tasks);
                     }
                 });
@@ -135,50 +124,18 @@ export class TaskService {
             .map(response => {
                 return response.json();
             }).subscribe(data => {
-                let finishedTaskIndex = this.tasks.findIndex(t => t.id == data.id);
+                let finishedTaskIndex = this.tasks.findIndex(t => t.id === data.id);
 
                 if (finishedTaskIndex != null) {
-                    this.tasks[finishedTaskIndex] = data;
+                    this.tasks[finishedTaskIndex] = new Task(data.id, data.title, data.deadline, data.isFinished);;
                     this.stream.next(this.tasks);
                 }
             });
     }
-
-
-    getTask(id: number): ITask {
+    
+    getTask(id: number): Task {
         return this.tasks.find(t => t.id == id);
     }
-    /*
-    private obtainTasksFromApi(): void {
-
-        console.log('obtainTasksFromApi');
-
-        let headers = new Headers({
-            'Content-Type': 'application/json'
-        });
-
-        // Obtains tasks from json file
-        // Maps them to array of Task
-        // Subscribes to itself (change this in future) and save obtained tasks
-        // Notify about task collection change
-        this.http.get(this.azureTasksApiUrl)
-            .map((responseData) => {
-                return responseData.json();
-            })
-            .map((tasks: Array<any>) => {
-                let result: Array<ITask> = [];
-                if (tasks) {
-                    tasks.forEach((task) => {
-                        result.push(new Task(task.id, task.title, task.deadline, task.isFinished));
-                    });
-                    return result;
-                }
-            }).subscribe(res => {
-                //this.tasks = res;
-                //this.subject.next(this.tasks);
-            });
-    }
-*/
 
     private handleError(error: any): any {
         // In a real world app, we might use a remote logging infrastructure
@@ -188,6 +145,6 @@ export class TaskService {
         console.error(errMsg); // log to console instead
 
         //console.log(error);
-        return Observable.throw(error.json().error || 'Server error');
+        return Observable.throw(error.json().error || 'Server error wqeqwe');
     }
 }

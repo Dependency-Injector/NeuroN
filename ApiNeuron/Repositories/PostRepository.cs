@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using ApiNeuron.Models;
 
 namespace ApiNeuron.Repositories
@@ -21,7 +22,7 @@ namespace ApiNeuron.Repositories
 
         public Post Get(int id)
         {
-            return context.Posts.FirstOrDefault(p => p.Id == id);
+            return Get(p => p.Id == id);
         }
 
         public Post Add(Post avatar)
@@ -50,6 +51,11 @@ namespace ApiNeuron.Repositories
                 context.SaveChanges();
             }
             return avatarToRemove;
+        }
+
+        public Post Get(Expression<Func<Post, bool>> predicate)
+        {
+            return context.Posts.FirstOrDefault(predicate);
         }
     }
 }

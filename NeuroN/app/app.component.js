@@ -28,21 +28,25 @@ System.register(['@angular/core', '@angular/router', './shared/utilities/channel
                 constructor(router, channelService) {
                     this.router = router;
                     this.channelService = channelService;
-                    this.pageTitle = 'NeuroN FrameworK';
-                    this.taskListTitle = 'Todo list';
-                    this.connectionState = this.channelService.connectionState.map((state) => {
-                        return channel_service_1.ConnectionState[state];
-                    });
-                    this.channelService.error.subscribe((error) => { console.warn(error); }, (error) => { console.error("errors$ error", error); });
-                    this.channelService.starting.subscribe(() => { console.log("signalr service has been started"); }, () => { console.log("signalr service failed to start"); });
+                    /* this.connectionState = this.channelService.connectionState.map((state: ConnectionState) => {
+                         return ConnectionState[state];
+                     });
+             
+                     this.channelService.error.subscribe(
+                         (error: any) => { console.warn(error); },
+                         (error: any) => { console.error("errors$ error", error); });
+             
+                     this.channelService.starting.subscribe(
+                         () => { console.log("signalr service has been started"); },
+                         () => { console.log("signalr service failed to start"); });*/
                 }
                 onRouteSelected(route) {
                     console.log(route);
                     this.router.navigate([route]);
                 }
                 ngOnInit() {
-                    console.log("starting channel service");
-                    this.channelService.start();
+                    // console.log("starting channel service");
+                    // this.channelService.start();
                 }
             };
             AppComponent = __decorate([

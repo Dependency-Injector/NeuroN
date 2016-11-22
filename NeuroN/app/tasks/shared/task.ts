@@ -1,19 +1,32 @@
-﻿export interface ITask {
-    id?: number;
+﻿import * as moment from 'moment';
+const momentConstructor: (value?: any) => moment.Moment = (<any>moment).default || moment;
+
+export interface ITask {
+    id: number;
     title: string;
     deadline: string;
-    isFinished?: boolean;
+    isFinished: boolean;
+
+    getRemainingDays(): number;
 }
+
 
 export class Task implements ITask {
     constructor(
-        public id: number,
-        public title: string,
-        public deadline: string,
-        public isFinished: boolean) {
+        public id: number = 0,
+        public title: string = '',
+        public deadline: string = '',
+        public isFinished: boolean = false) {
     }
     
-    calculateRemainingDays(currentDay: number): number {
-        return 4;
+    getRemainingDays(): number {
+        let today = momentConstructor(new Date()).startOf('day');
+        let deadlineDate = momentConstructor(this.deadline).add(1, 'day').startOf('day');
+
+        let remainingDays = deadlineDate.diff(today, 'day');
+
+        //let remainingDays = momentConstructor(this.deadline).startOf('day').diff(today., 'day');
+    
+        return remainingDays;
     }
 }

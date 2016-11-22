@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using ApiNeuron.Models;
 
 namespace ApiNeuron.Repositories
@@ -50,6 +51,11 @@ namespace ApiNeuron.Repositories
                 context.SaveChanges();
             }
             return notificationToRemove;
+        }
+
+        public Notification Get(Expression<Func<Notification, bool>> predicate)
+        {
+            throw new NotImplementedException();
         }
     }
 }
