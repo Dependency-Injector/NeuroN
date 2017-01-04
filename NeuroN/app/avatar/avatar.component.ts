@@ -3,6 +3,7 @@ import { AvatarService } from './shared/avatar.service';
 import { IAvatar } from './shared/avatar';
 
 @Component({
+    selector: 'nn-avatar',
     templateUrl: 'app/avatar/avatar.component.html'
 })
 

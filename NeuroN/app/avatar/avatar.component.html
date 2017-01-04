@@ -1,19 +1,17 @@
-﻿<div class="page">
-    <div class="pageheader">
-        <h2>Avatar</h2>
+﻿<section class="tile">
+    <div class="tile-header dvd dvd-btm">
+        <h1 class="custom-font">
+            {{avatar.name}}
+        </h1>
     </div>
 
-    <div class="row">
-        <div class="col-md-6">
-            <section class="tile">
-                <div class="tile-header dvd dvd-btm">
-                    <h3>{{avatar.name}}</h3>
-                </div>
-                <div class="tile-body">
-                    <h3>XP: {{avatar.xp}}</h3>
-                    <h3>Level: {{avatar.level}}</h3>
-                </div>
-            </section>
-        </div>
+    <div class="tile-body dvd dvd-btm">
+        <h3>XP: {{avatar.xp}} / {{avatar.level * 100}}</h3>
+        <h3>Level: {{avatar.level}}</h3>
     </div>
-</div>
+
+    <div class="tile-body dvd dvd-btm">
+        <h3>Recent progress:</h3>
+        <nn-progress></nn-progress>
+    </div>
+</section>

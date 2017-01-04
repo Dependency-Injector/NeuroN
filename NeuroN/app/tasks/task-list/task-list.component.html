@@ -1,4 +1,5 @@
-﻿<div *ngFor="let task of tasks" class="list-item">
+﻿<h3>{{title}}</h3>
+<div *ngFor="let task of tasks" class="list-item">
     <span>
         <i class="fa fa-check-square-o" *ngIf="task.isFinished"></i>
         <i class="fa fa-square-o" *ngIf="!task.isFinished"></i>

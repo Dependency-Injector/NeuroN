@@ -16,10 +16,13 @@ import { BlogEntryListComponent } from './blog/blog-entry-list/blog-entry-list.c
 import { EditBlogEntryComponent } from './blog/edit-blog-entry/edit-blog-entry.component';
 import { AvatarComponent } from './avatar/avatar.component';
 import { NotificationComponent } from './shared/notification/notification.component';
+import { ProgressComponent } from './progress/progress.component';
+import { DisplayOptionsComponent } from './tasks/display-options/display-options.component';
 
 import { TaskService } from './tasks/shared/task.service';
 import { BlogService } from './blog/shared/blog.service';
 import { AvatarService } from './avatar/shared/avatar.service';
+import { ProgressService } from './progress/shared/progress.service';
 import { NotificationService } from './shared/notification/shared/notification.service';
 import { ChannelService, SignalrWindow, ChannelConfig } from './shared/utilities/channel.service';
 import { ApiHelper } from './utilities/apiHelper.service';
@@ -50,6 +53,7 @@ channelConfig.hubName = "EventHub";
         TodoPageComponent,
         EditTaskComponent,
         TaskListComponent,
+        DisplayOptionsComponent,
 
         // Blog page
         BlogComponent,
@@ -58,13 +62,15 @@ channelConfig.hubName = "EventHub";
 
         // Avatar page
         AvatarComponent,
-        NotificationComponent
+        NotificationComponent,
+        ProgressComponent
     ],
 
     providers: [
         TaskService,
         BlogService,
         AvatarService,
+        ProgressService,
         NotificationService,
         ChannelService,
         {   provide: SignalrWindow, useValue: window },

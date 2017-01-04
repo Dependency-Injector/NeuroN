@@ -8,9 +8,10 @@ using ApiNeuron.Models;
 namespace ApiNeuron.Migrations
 {
     [DbContext(typeof(NeuronContext))]
-    partial class NeuronContextModelSnapshot : ModelSnapshot
+    [Migration("20161205163712_GameEvents")]
+    partial class GameEvents
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
@@ -25,7 +26,7 @@ namespace ApiNeuron.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<decimal>("Xp");
+                    b.Property<int>("Xp");
 
                     b.HasKey("Id");
 
@@ -40,8 +41,6 @@ namespace ApiNeuron.Migrations
                     b.Property<DateTime>("Occured");
 
                     b.Property<int?>("RelatedEntityId");
-
-                    b.Property<string>("Text");
 
                     b.Property<int>("Type");
 
@@ -96,26 +95,6 @@ namespace ApiNeuron.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Tasks");
-                });
-
-            modelBuilder.Entity("ApiNeuron.Models.UserProgress", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("AssociatedEntityId");
-
-                    b.Property<DateTime>("Occured");
-
-                    b.Property<int>("Source");
-
-                    b.Property<decimal>("Xp");
-
-                    b.Property<decimal>("XpMultiplier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Progresses");
                 });
         }
     }

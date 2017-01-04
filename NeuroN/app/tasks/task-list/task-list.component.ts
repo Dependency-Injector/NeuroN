@@ -12,6 +12,7 @@ import { TaskService } from './../shared/task.service';
 
 export class TaskListComponent implements OnInit, OnChanges {
     @Input() tasks: Array<ITask> = new Array<ITask>();
+    @Input() title: string;
     @Output() editTaskClicked: EventEmitter<ITask> = new EventEmitter<ITask>();
 
     constructor(private taskService: TaskService) {

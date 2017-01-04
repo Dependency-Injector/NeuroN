@@ -1,5 +1,6 @@
 ﻿using ApiNeuron.Models;
 using ApiNeuron.Repositories;
+using ApiNeuron.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -52,6 +53,13 @@ namespace ApiNeuron
             services.AddScoped<IRepository<Task>, TaskRepository>();
             services.AddScoped<IRepository<Post>, PostRepository>();
             services.AddScoped<IRepository<Avatar>, AvatarRepository>();
+            services.AddScoped<IRepository<UserProgress>, UserProgressRepository>();
+            services.AddScoped<IRepository<GameEvent>, GameEventRepository>();
+
+
+            services.AddScoped<IUserProgressService, UserProgressService>();
+            services.AddScoped<ITaskService, TaskService>();
+            services.AddScoped<IGameEventService, GameEventService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

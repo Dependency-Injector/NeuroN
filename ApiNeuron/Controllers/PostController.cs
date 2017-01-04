@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using ApiNeuron.Common.Enums;
 using ApiNeuron.Models;
 using ApiNeuron.Repositories;
+using ApiNeuron.Services;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +13,12 @@ namespace ApiNeuron.Controllers
     public class PostController : Controller
     {
         private IRepository<Post> postRepository;
+        private IUserProgressService progressService;
 
-        public PostController(IRepository<Post> postRepository)
+        public PostController(IRepository<Post> postRepository, IUserProgressService progressService)
         {
             this.postRepository = postRepository;
+            this.progressService = progressService;
         }
         
         // GET: api/posts
@@ -43,6 +47,10 @@ namespace ApiNeuron.Controllers
                 return BadRequest();
 
             Post addedPost = postRepository.Add(post);
+
+            // Add xp for creating blog post
+            progressService.ApplyUserProgress(ProgressSource.BlogPostCreation, post.Id);
+
             return new ObjectResult(addedPost);
         }
         

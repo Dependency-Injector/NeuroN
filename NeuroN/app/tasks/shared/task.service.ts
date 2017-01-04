@@ -41,7 +41,7 @@ export class TaskService {
                     result.push(this.translateTask(task));
                 });
 
-                result = result.filter(task => task.isFinished == false);
+                //result = result.filter(task => task.isFinished === false);
                 return result;
             })
             .subscribe((tasksArray: Array<Task>) => {

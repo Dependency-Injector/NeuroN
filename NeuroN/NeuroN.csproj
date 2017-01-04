@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.component.html" />
+    <Content Include="app\progress\progress.component.html" />
     <Content Include="app\avatar\avatar.component.html" />
     <Content Include="app\blog\edit-blog-entry\edit-blog-entry.component.html" />
     <Content Include="app\main.js" />
@@ -80,6 +81,7 @@
     <Content Include="app\blog\blog-entry-list\blog-entry-list.component.html" />
     <Content Include="app\blog\blog.component.html" />
     <Content Include="app\shared\notification\notification.component.html" />
+    <Content Include="app\tasks\display-options\display-options.component.html" />
     <Content Include="app\tasks\task-details\task-details.component.html" />
     <Content Include="app\tasks\edit-task\edit-task.component.html" />
     <Content Include="app\tasks\edit-task\edit-task.component.css" />
@@ -133,6 +135,9 @@
     <TypeScriptCompile Include="app\app.component.ts" />
     <TypeScriptCompile Include="app\app.module.ts" />
     <TypeScriptCompile Include="app\app.routing.ts" />
+    <TypeScriptCompile Include="app\progress\progress.component.ts" />
+    <TypeScriptCompile Include="app\progress\shared\progress.service.ts" />
+    <TypeScriptCompile Include="app\progress\shared\progressUnit.ts" />
     <TypeScriptCompile Include="app\avatar\avatar.component.ts" />
     <TypeScriptCompile Include="app\avatar\shared\avatar.ts" />
     <TypeScriptCompile Include="app\avatar\shared\avatar.service.ts" />
@@ -153,10 +158,10 @@
     <TypeScriptCompile Include="app\blog\shared\blog-entry.ts" />
     <TypeScriptCompile Include="app\blog\blog.component.ts" />
     <TypeScriptCompile Include="app\tasks\edit-task\edit-task.component.ts" />
+    <TypeScriptCompile Include="app\tasks\display-options\display-options.component.ts" />
+    <TypeScriptCompile Include="app\tasks\shared\display-options.ts" />
     <TypeScriptCompile Include="app\tasks\task-details\task-details.component.ts" />
     <TypeScriptCompile Include="app\tasks\shared\task-filter.pipe.ts" />
-    <Content Include="app\temp\sample-file2.js" />
-    <TypeScriptCompile Include="app\temp\sample-file.ts" />
     <TypeScriptCompile Include="app\tasks\task-list\task-list.component.ts" />
     <TypeScriptCompile Include="app\tasks\shared\task.service.ts" />
     <TypeScriptCompile Include="app\tasks\shared\task.ts" />

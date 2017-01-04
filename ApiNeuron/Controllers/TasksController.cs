@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ApiNeuron.Repositories;
+using ApiNeuron.Services;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Task = ApiNeuron.Models.Task;
@@ -13,10 +14,12 @@ namespace ApiNeuron.Controllers
     public class TasksController : Controller
     {
         private IRepository<Task> taskRepository;
-
-        public TasksController(IRepository<Task> taskRepository)
+        private ITaskService taskService;
+        
+        public TasksController(IRepository<Task> taskRepository, ITaskService taskService)
         {
             this.taskRepository = taskRepository;
+            this.taskService = taskService;
         }
         
         // GET: api/tasks
@@ -60,7 +63,8 @@ namespace ApiNeuron.Controllers
             if (task == null)
                 return BadRequest();
 
-            Task addedTask = taskRepository.Add(task);
+            Task addedTask = taskService.CreateTask(task);
+
             return new ObjectResult(addedTask);
         }
         
@@ -91,8 +95,8 @@ namespace ApiNeuron.Controllers
             if (finishedTask == null)
                 return NotFound();
 
-            finishedTask.IsFinished = true;
-            taskRepository.Update(finishedTask);
+            taskService.FinishTask(id);
+
             return new ObjectResult(finishedTask);
         }
     }

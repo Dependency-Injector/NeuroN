@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int Xp { get; set; }
+        public decimal Xp { get; set; }
         public int Level { get; set; }
     }
 }

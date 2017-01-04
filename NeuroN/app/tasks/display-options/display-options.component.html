@@ -1,0 +1,7 @@
+﻿<div class="" style="margin-left: 20px; margin-top: 20px;">
+    <button *ngIf="options.finishedTasksVisible" class="btn btn-primary" (click)="setFinishedTasksVisibility(false)">Finished visible</button>
+    <button *ngIf="!options.finishedTasksVisible" class="btn" (click)="setFinishedTasksVisibility(true)">Finished invisible</button>
+
+    <button *ngIf="options.overdueTasksVisible" class="btn btn-primary" (click)="setOverdueTasksVisibility(false)">Overdue visible</button>
+    <button *ngIf="!options.overdueTasksVisible" class="btn" (click)="setOverdueTasksVisibility(true)">Overdue invisible</button>
+</div>
